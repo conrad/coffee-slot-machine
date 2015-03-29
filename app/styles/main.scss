@@ -68,33 +68,33 @@ body {
 .marketing p + h4 {
     margin-top: 28px;
 }
-#slot-machine {
-  padding-top: 100px;
-}
 
 #stage {
-  // margin: 400px auto;
-  padding: 400px auto;
+  margin: 150px auto;
   width: 600px;
   height: 400px;
-  // z-index: 1000;
-  background: black;
+  /*
+  
+  Setting the perspective of the contents of the stage
+  but not the stage itself
+  
+  */
   -webkit-perspective: 800;
 }
 
 #reels {
-  margin: 200px auto;
-  width: 400px;
-  height: 600px;
+  display: inline;
+  margin: 0 auto;
+  width: 600px;
+  height: 400px;
   /* Ensure that we're in 3D space */
   -webkit-transform-style: preserve-3d;
 }
 
 .reel {
-  display: inline;
   margin: 0 auto;
-  height: 90px;
-  width: 100px;
+  height: 110px;
+  width: 600px;
   -webkit-transform-style: preserve-3d;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
@@ -110,9 +110,10 @@ body {
 
 .poster {
   position: absolute;
-  width: 90px;
-  height: 90px;
-  opacity: 1;
+  left: 250px;
+  width: 100px;
+  height: 100px;
+  opacity: 0.7;
   color: rgba(0,0,0,0.9);
   -webkit-border-radius: 10px;
 }
@@ -137,26 +138,23 @@ body {
 
 /*
 Set up each row to have a different animation duration
-and alternating y-axis rotation directions.
+and alternating x-axis rotation directions.
 */
-#reel-1-spin {
+#reel-1 {
   -webkit-animation-name: x-spin;
-  -webkit-animation-duration: 7s;
+  -webkit-animation-duration: 2s; 
 }
 
-#reel-2-spin {
+#reel-2 {
   -webkit-animation-name: back-x-spin;
+  -webkit-animation-duration: 4s;
+}
+
+#reel-3 {
+  -webkit-animation-name: x-spin;
   -webkit-animation-duration: 3s;
 }
 
-#reel-3-spin {
-  -webkit-animation-name: x-spin;
-  -webkit-animation-duration: 1s;
-}
-
-/* 
-Define each animation and specify intermediate steps
-*/
 @-webkit-keyframes x-spin {
   0%    { -webkit-transform: rotateX(0deg); }
   50%   { -webkit-transform: rotateX(180deg); }
@@ -168,9 +166,6 @@ Define each animation and specify intermediate steps
   50%   { -webkit-transform: rotateX(180deg); }
   100%  { -webkit-transform: rotateX(0deg); }
 }
-
-
-
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
