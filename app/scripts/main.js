@@ -18,7 +18,7 @@ SlotMachine.setup_posters = function(reel, reelNum) {
     // compute and assign the transform for this poster
     var transform = 'rotateX(' + (posterAngle * i) + 'deg) translateZ(' + SlotMachine.reelRadius + 'px)';
     poster.style.webkitTransform = transform;
-    // setup the number to show inside the poster
+    // setup the image to show inside the poster
     var content = poster.appendChild(document.createElement('p'));
     content.textContent = i;
     // add the poster to the reel

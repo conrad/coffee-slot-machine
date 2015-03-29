@@ -72,24 +72,25 @@ body {
 #stage {
   margin: 150px auto;
   width: 600px;
-  height: 400px;
+  height: 200px;
   -webkit-perspective: 800;
 }
 
 #reels {
-  display: inline;
-  margin: 0 auto;
+  margin: 200px -150px auto;
   width: 600px;
-  height: 400px;
+  height: 200px;
   /* Ensure that we're in 3D space */
   -webkit-transform-style: preserve-3d;
 }
 
 .reel {
-  margin: 0 auto;
+  // margin: 0 auto;
+  // margin: 0 auto 0 90px; 
   // display: inline;
-  height: 110px;  
-  width: 400px;   // centers reels
+  float: left;
+  height: 100px;  // must be 
+  width: 120px;   // centers reels
   -webkit-transform-style: preserve-3d;
   // -webkit-animation-iteration-count: infinite;
   // -webkit-animation-timing-function: linear;
@@ -109,20 +110,22 @@ body {
   left: 250px;
   width: 100px;
   height: 100px;
-  opacity: 0.7;
+  opacity: 1.0;
   color: rgba(0,0,0,0.9);
   -webkit-border-radius: 10px;
 }
 
-#poster1{
-  left: 50px;
-}
-#poster2{
-  left: 150px;
-}
-#poster3{
-  left: 250px;
-}
+// #poster1 {
+//   // top: 100px;
+//   left: 50px;
+// }
+// #poster2 {
+//   left: 150px;
+// }
+// #poster3 {
+//   // top: -100px;
+//   left: 250px;
+// }
 
 .poster > p {
   font-family: 'Georgia', serif;
