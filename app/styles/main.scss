@@ -3,6 +3,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
 // bower:scss
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+// @import "../scripts/main.js";
+
 
 .browsehappy {
      margin: 0.2em 0;
@@ -72,12 +74,24 @@ body {
 #stage {
   margin: 150px auto;
   width: 600px;
-  height: 200px;
+  height: 350px;
   -webkit-perspective: 800;
+}
+
+#slot-machine {
+  position: absolute;
+  top: -183px;
+  left: -30px;
+  background: url('../assets/slot-machine.png') no-repeat;
+  background-size: contain;
+  width: 650px;
+  height: 680px;
+  z-index: 1;
 }
 
 #reels {
   margin: 200px -150px auto;
+  padding: 64px 0;
   width: 600px;
   height: 200px;
   /* Ensure that we're in 3D space */
@@ -90,29 +104,37 @@ body {
   // display: inline;
   float: left;
   height: 100px;  // must be 
-  width: 120px;   // centers reels
+  width: 140px;   // centers reels
   -webkit-transform-style: preserve-3d;
   // -webkit-animation-iteration-count: infinite;
   // -webkit-animation-timing-function: linear;
-  -webkit-animation-timing-function: ease-in-out;
+  // -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: cubic-bezier(0.770, 0.115, 0.420, 1.040);
 }
 
 .reel > :nth-child(odd) {
-  background-color: #995C7F;
+  background-color: #5276B2;  // #995C7F;
 }
 
 .reel > :nth-child(even) {
-  background-color: #835A99;
+  background-color: #FF7D68;  // #835A99;
 }
 
 .poster {
   position: absolute;
   left: 250px;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
+  // display: table;
   opacity: 1.0;
   color: rgba(0,0,0,0.9);
-  -webkit-border-radius: 10px;
+  // -webkit-border-radius: 10px;
+}
+
+.image {
+  // vertical-align: middle;
+  // display: table-cell;  
+  margin-top: 10px;
 }
 
 // #poster1 {

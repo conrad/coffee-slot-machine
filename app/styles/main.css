@@ -4958,11 +4958,22 @@ body {
 #stage {
   margin: 150px auto;
   width: 600px;
-  height: 200px;
+  height: 350px;
   -webkit-perspective: 800; }
+
+#slot-machine {
+  position: absolute;
+  top: -183px;
+  left: -30px;
+  background: url('../assets/slot-machine.png') no-repeat;
+  background-size: contain;
+  width: 650px;
+  height: 680px;
+  z-index: 1; }
 
 #reels {
   margin: 200px -150px auto;
+  padding: 64px 0;
   width: 600px;
   height: 200px;
   /* Ensure that we're in 3D space */
@@ -4971,24 +4982,26 @@ body {
 .reel {
   float: left;
   height: 100px;
-  width: 120px;
+  width: 140px;
   -webkit-transform-style: preserve-3d;
-  -webkit-animation-timing-function: ease-in-out; }
+  -webkit-animation-timing-function: cubic-bezier(0.77, 0.115, 0.42, 1.04); }
 
 .reel > :nth-child(odd) {
-  background-color: #995C7F; }
+  background-color: #5276B2; }
 
 .reel > :nth-child(even) {
-  background-color: #835A99; }
+  background-color: #FF7D68; }
 
 .poster {
   position: absolute;
   left: 250px;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   opacity: 1.0;
-  color: rgba(0, 0, 0, 0.9);
-  -webkit-border-radius: 10px; }
+  color: rgba(0, 0, 0, 0.9); }
+
+.image {
+  margin-top: 10px; }
 
 .poster > p {
   font-family: 'Georgia', serif;
