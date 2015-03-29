@@ -73,12 +73,6 @@ body {
   margin: 150px auto;
   width: 600px;
   height: 400px;
-  /*
-  
-  Setting the perspective of the contents of the stage
-  but not the stage itself
-  
-  */
   -webkit-perspective: 800;
 }
 
@@ -93,11 +87,13 @@ body {
 
 .reel {
   margin: 0 auto;
-  height: 110px;
-  width: 600px;
+  // display: inline;
+  height: 110px;  
+  width: 400px;   // centers reels
   -webkit-transform-style: preserve-3d;
   -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
+  // -webkit-animation-timing-function: linear;
+  -webkit-animation-timing-function: ease-in-out;
 }
 
 .reel > :nth-child(odd) {
@@ -140,32 +136,46 @@ body {
 Set up each row to have a different animation duration
 and alternating x-axis rotation directions.
 */
-#reel-1 {
+#reel-1.active {
   -webkit-animation-name: x-spin;
-  -webkit-animation-duration: 2s; 
+  -webkit-animation-duration: 4s; 
 }
 
-#reel-2 {
+#reel-2.active {
   -webkit-animation-name: back-x-spin;
-  -webkit-animation-duration: 4s;
+  -webkit-animation-duration: 6s;
 }
 
-#reel-3 {
-  -webkit-animation-name: x-spin;
-  -webkit-animation-duration: 3s;
+#reel-3.active {
+  -webkit-animation-name: x-spin-fast;
+  -webkit-animation-duration: 9s;
 }
 
 @-webkit-keyframes x-spin {
   0%    { -webkit-transform: rotateX(0deg); }
-  50%   { -webkit-transform: rotateX(180deg); }
-  100%  { -webkit-transform: rotateX(360deg); }
+  // 50%   { -webkit-transform: rotateX(180deg); }
+  100%  { -webkit-transform: rotateX(1000deg); }
 }
 
+@-webkit-keyframes x-spin-fast {
+  0%    { -webkit-transform: rotateX(0deg); }
+  // 50%   { -webkit-transform: rotateX(180deg); }
+  100%  { -webkit-transform: rotateX(3600deg); }
+}
+
+// @-webkit-keyframes x-spin {
+//   0%    { -webkit-transform: rotateX(0deg); }
+//   50%   { -webkit-transform: rotateX(180deg); }
+//   100%  { -webkit-transform: rotateX(360deg); }
+// }
+
 @-webkit-keyframes back-x-spin {
-  0%    { -webkit-transform: rotateX(360deg); }
-  50%   { -webkit-transform: rotateX(180deg); }
+  0%    { -webkit-transform: rotateX(1800deg); }
+  // 50%   { -webkit-transform: rotateX(180deg); }
   100%  { -webkit-transform: rotateX(0deg); }
 }
+
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
