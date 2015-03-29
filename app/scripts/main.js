@@ -35,10 +35,21 @@ SlotMachine.init = function() {
 // call init once the document is fully loaded
 window.addEventListener('load', SlotMachine.init, false);
 // start & stop spinning with play button
-$('#play').on('click', function(){
+$('#play').one('click', function(){
   $('#reel-1').toggleClass('active');
   $('#reel-2').toggleClass('active');
   $('#reel-3').toggleClass('active');
+  setTimeout(function() {
+    $('#reel-1').toggleClass('active');
+    $('#reel-2').toggleClass('active');
+    $('#reel-3').toggleClass('active');
+
+    // $('#play').one('click', function(){
+    //   $('#reel-1').toggleClass('active');
+    //   $('#reel-2').toggleClass('active');
+    //   $('#reel-3').toggleClass('active');
+
+  }, 9100)
 })
 
 

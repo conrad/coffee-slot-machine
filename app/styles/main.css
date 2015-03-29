@@ -4974,7 +4974,6 @@ body {
   height: 110px;
   width: 400px;
   -webkit-transform-style: preserve-3d;
-  -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: ease-in-out; }
 
 .reel > :nth-child(odd) {

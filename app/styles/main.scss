@@ -91,7 +91,7 @@ body {
   height: 110px;  
   width: 400px;   // centers reels
   -webkit-transform-style: preserve-3d;
-  -webkit-animation-iteration-count: infinite;
+  // -webkit-animation-iteration-count: infinite;
   // -webkit-animation-timing-function: linear;
   -webkit-animation-timing-function: ease-in-out;
 }
@@ -139,6 +139,7 @@ and alternating x-axis rotation directions.
 #reel-1.active {
   -webkit-animation-name: x-spin;
   -webkit-animation-duration: 4s; 
+  // -webkit-transform-origin: 50% 50%
 }
 
 #reel-2.active {
