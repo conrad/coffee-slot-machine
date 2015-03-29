@@ -35,22 +35,18 @@ SlotMachine.init = function() {
 // call init once the document is fully loaded
 window.addEventListener('load', SlotMachine.init, false);
 // start & stop spinning with play button
-$('#play').one('click', function(){
-  $('#reel-1').toggleClass('active');
-  $('#reel-2').toggleClass('active');
-  $('#reel-3').toggleClass('active');
-  setTimeout(function() {
-    $('#reel-1').toggleClass('active');
-    $('#reel-2').toggleClass('active');
-    $('#reel-3').toggleClass('active');
-
-    // $('#play').one('click', function(){
-    //   $('#reel-1').toggleClass('active');
-    //   $('#reel-2').toggleClass('active');
-    //   $('#reel-3').toggleClass('active');
-
-  }, 9100)
-})
+$('#play').on('click', function(){
+  if ( !($('#reel-1').hasClass('active')) ) {
+    $('#reel-1').addClass('active');
+    $('#reel-2').addClass('active');
+    $('#reel-3').addClass('active');
+    setTimeout(function() {
+      $('#reel-1').removeClass('active');
+      $('#reel-2').removeClass('active');
+      $('#reel-3').removeClass('active');
+    }, 9100);
+  }
+});
 
 
 SlotMachine.images = {
