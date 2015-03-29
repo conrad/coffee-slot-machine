@@ -4955,24 +4955,28 @@ body {
 .marketing p + h4 {
   margin-top: 28px; }
 
+#slot-machine {
+  padding-top: 100px; }
+
 #stage {
-  margin: 150px auto;
+  padding: 400px auto;
   width: 600px;
   height: 400px;
-  /* Setting the perspective of the contents of the stage but not the stage itself*/
+  background: black;
   -webkit-perspective: 800; }
 
 #reels {
-  margin: 0 auto;
+  margin: 200px auto;
   width: 400px;
   height: 600px;
   /* Ensure that we're in 3D space */
   -webkit-transform-style: preserve-3d; }
 
 .reel {
+  display: inline;
   margin: 0 auto;
-  height: 110px;
-  width: 600px;
+  height: 90px;
+  width: 100px;
   -webkit-transform-style: preserve-3d;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear; }
@@ -4985,12 +4989,20 @@ body {
 
 .poster {
   position: absolute;
-  left: 250px;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   opacity: 1;
   color: rgba(0, 0, 0, 0.9);
   -webkit-border-radius: 10px; }
+
+#poster1 {
+  left: 50px; }
+
+#poster2 {
+  left: 150px; }
+
+#poster3 {
+  left: 250px; }
 
 .poster > p {
   font-family: 'Georgia', serif;
@@ -5003,15 +5015,15 @@ body {
 Set up each row to have a different animation duration
 and alternating y-axis rotation directions.
 */
-#reel-1 {
+#reel-1-spin {
   -webkit-animation-name: x-spin;
   -webkit-animation-duration: 7s; }
 
-#reel-2 {
+#reel-2-spin {
   -webkit-animation-name: back-x-spin;
   -webkit-animation-duration: 3s; }
 
-#reel-3 {
+#reel-3-spin {
   -webkit-animation-name: x-spin;
   -webkit-animation-duration: 1s; }
 

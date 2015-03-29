@@ -5,7 +5,7 @@ var ReelView = Backbone.View.extend({
   place_posters: function (reel) {
     var posterAngle = 360 / POSTERS_PER_REEL;
     for (var i = 0; i < POSTERS_PER_REEL; i ++) {
-      
+
       // use posterview here
       var poster = document.createElement('div');
       poster.className = 'poster';
