@@ -151,15 +151,14 @@ $('#espresso').on('click', function() {
 
 $('#mute').on('click', function() {
   var attr = $('.audio-player').prop('muted');
-  console.log(attr);
   if (!attr) {
     $('.audio-player').prop('muted', true);
+    $('#mute').html('UnMute');
   } else {
     $('.audio-player').prop('muted', false);
+    $('#mute').html('Mute');
   }
-})
-
-
+});
 
 
 
@@ -190,21 +189,21 @@ SlotMachine.pickPoster = function(reelNum, imageSet) {
 SlotMachine.win.coffee = function() {
   // put some good stuff in here. jQuery, gifs, ...
   console.log('Win Coffee!');
-  $(".audio-player")[0].play();
+  $('.audio-player')[0].play();
 
 };
 
 SlotMachine.win.tea = function() {
   // put some good stuff in here. jQuery, gifs, 
   console.log('Win Tea!');
-  $(".audio-player")[0].play();
+  $('.audio-player')[0].play();
   
 };
 
 SlotMachine.win.espresso = function() {
   // put some good stuff in here. jQuery, gifs, 
   console.log('Win Espresso!');
-  $(".audio-player")[0].play();
+  $('.audio-player')[0].play();
 };
 
 
