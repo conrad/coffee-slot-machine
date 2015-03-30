@@ -2,7 +2,8 @@
 // $(function() {
 var SlotMachine = {
   postersPerReel: 12,
-  reelRadius: 200
+  reelRadius: 200,
+  win: {}         // organizational objects
 };
 window.SlotMachine = SlotMachine;
 
@@ -49,9 +50,7 @@ SlotMachine.init = function() {
 window.addEventListener('load', SlotMachine.init, false);
 
 // start & stop spinning with play button
-
-
-$('#play').on('click', function(){
+$('#playTHis').on('click', function(){
   $('#reel-1').toggleClass('active');
   $('#reel-2').toggleClass('active');
   $('#reel-3').toggleClass('active');
@@ -61,6 +60,7 @@ $('#play').on('click', function(){
     $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
   }
 
+  // _.debounce(function(e) { ... }, 9100);
   // if ( !($('#reel-1').hasClass('active')) ) {
   //   $('#reel-1').addClass('active');
   //   $('#reel-2').addClass('active');
@@ -73,28 +73,79 @@ $('#play').on('click', function(){
   //   }, 9100);
 });
 
+
+
+SlotMachine.spinReel = function(selector, angle, duration) {
+  // $('#reel-2').toggleClass('active');
+  // $('#reel-3').toggleClass('active');
+
+  console.log('spinReel called with', selector, angle, duration);
+  $(selector).css({
+      spin: 'rotateX(' + angle + 'deg)',
+      time: duration + 's',
+      easing: 'cubic-bezier(0.770, 0.115, 0.420, 1.040)',
+      // webkitTransform : 'rotateX(' + angle + 'deg) ' + duration +,
+      // WebkitTransition : 'spin time easing',
+      // MozTransition    : 'spin time easing',
+      // MsTransition     : 'spin time easing',
+      // transition       : 'spin time easing',
+      // OTransition      : 'spin time easing',
+
+      WebkitTransform: 'rotateX(' + angle + 'deg)',
+      transform: 'rotateX(' + angle + 'deg)',
+      MozTransform: 'rotateX(' + angle + 'deg)',
+      WebkitTransform: 'rotateX(' + angle + 'deg)',
+      msTransform: 'rotateX(' + angle + 'deg)',
+
+      WebkitTransition : '1s ease-in-out',
+      MozTransition    : '1s ease-in-out',
+      MsTransition     : '1s ease-in-out',
+      OTransition      : '1s ease-in-out',
+      transition       : '1s ease-in-out'
+  });
+
+
+
+      // console.log(this.spin);
+
+      // works... but not transition:
+      // WebkitTransform: 'rotateX(300deg)',
+      // transform: 'rotateX(300deg)',
+      // MozTransform: 'rotateX(300deg)',
+      // WebkitTransform: 'rotateX(300deg)',
+      // msTransform: 'rotateX(300deg)'
+
+      // webkitTransition : 'rotateX(' + angle + 'deg) ' + duration +,
+      // WebkitTransition : 'rotateX(' + angle + 'deg) ' + duration + 's cubic-bezier(0.770, 0.115, 0.420, 1.040)',
+      // MozTransition    : 'rotateX(' + angle + 'deg) ' + duration + 's cubic-bezier(0.770, 0.115, 0.420, 1.040)',
+      // MsTransition     : 'rotateX(' + angle + 'deg) ' + duration + 's cubic-bezier(0.770, 0.115, 0.420, 1.040)',
+      // OTransition      : 'rotateX(' + angle + 'deg) ' + duration + 's cubic-bezier(0.770, 0.115, 0.420, 1.040)',
+      // transition       : 'rotateX(' + angle + 'deg) ' + duration + 's cubic-bezier(0.770, 0.115, 0.420, 1.040)'
+
+  // $(selector).css('webkit-transform', ).css('webkit-transition-duration', duration + 's').css('transition-duration', duration + 's');
+  // $(selector).css('webkitTransform', 'rotateX(' + angle + 'deg)').css('webkitTransitionDuration', duration + 's').css('transitionDuration', duration + 's');
+
+};
+
+
 SlotMachine.play = function() {
   // create a final poster and its degrees for each reel
     // order: 0 coffee, 1 tea, 2 espresso, 3 coffee, 4 tea, 5 espresso, 6 coffee, 7 tea, 8 espresso, 9 coffee, 10 tea, 11 espresso
   var final1 = Math.ceil(Math.random() * 12);
   var final2 = Math.ceil(Math.random() * 12);
   var final3 = Math.ceil(Math.random() * 12);
-  var deg1 = (final1 * 30) + 1080; 
-  var deg2 = (final2 * 30) + 1800; 
-  var deg3 = (final3 * 30) + 3240; 
-
   console.log(final1, final2, final3);
-  // var degArr = [deg1, deg2, deg3];
-  // other arguments???
-  // SlotMachine.editKeyFramesRules(deg1, 'spin-1');
-  // SlotMachine.editKeyFramesRules(deg2, 'spin-2');
-  // SlotMachine.editKeyFramesRules(deg3, 'spin-3');
+  var angle1 = (final1 * 30) + 720; 
+  var angle2 = (final2 * 30) + 1800; 
+  var angle3 = (final3 * 30) + 3240; 
 
   // Having trouble making this work because there the setter for cssText isn't working properly... need a workaround (CSSOM?)
-  SlotMachine.editReelSpinRule(deg1, 4, '#reel-1.active');
-  SlotMachine.editReelSpinRule(deg2, 7, '#reel-2.active');
-  SlotMachine.editReelSpinRule(deg3, 10, '#reel-3.active');
-
+  // SlotMachine.editReelSpinRule(angle1, 4, '#reel-1.active');
+  // SlotMachine.editReelSpinRule(angle2, 7, '#reel-2.active');
+  // SlotMachine.editReelSpinRule(angle3, 10, '#reel-3.active');
+  SlotMachine.spinReel('#reel-1', angle1, 4);
+  SlotMachine.spinReel('#reel-2', angle2, 7);
+  SlotMachine.spinReel('#reel-3', angle3, 10);
 
   if (final1 % 3 === final2 % 3 && final1 % 3 === final3 % 3) {
     // win
@@ -112,40 +163,74 @@ SlotMachine.play = function() {
 };
 
 
+$('#play').on('click', SlotMachine.play);
 
-// find the desired keyFrames rules in CSS to control outcomes dynamically
-  // rules: 'spin-1', 'spin-2', & 'spin-3'
-SlotMachine.findCssRule = function (selector) {
-    // cross-browser CSS rule object
+
+
+
+
+
+
+
+
+SlotMachine.getCssRules = function() {
+    //  CSS rule object conditional for cross-browser compatibility
     if (document.styleSheets[0].cssRules) {
-      var rules = document.styleSheets[0].cssRules;
+      return document.styleSheets[0].cssRules;
     } else if (document.styleSheets[0].rules) {
-      var rules = document.styleSheets[0].rules;
-    }
-
-    for (var j = 0; j < rules.length; ++j) {
-      if (rules[j].selectorText === selector) {
-        return [rules[j], j];
-      }
+      return document.styleSheets[0].rules;
     }
     return null;
 };
 
+// find the desired CSS rules to control outcomes dynamically
+  // rules: 'spin-1', 'spin-2', & 'spin-3'
+SlotMachine.findCssRule = function (selector) {
+  
+  var rules = SlotMachine.getCssRules();
+
+  for (var j = 0; j < rules.length; ++j) {
+    if (rules[j].selectorText === selector) {
+      console.log('Rule found:', rules[j], 'at', j);
+      return [rules[j], j];
+    }
+  }
+  console.log('Rule not found');
+  return null;
+};
+
 
 // Replaces the animation hard-coded specifications
-SlotMachine.editReelSpinRule = function(deg, duration, selector) {
-  // var rule = SlotMachine.findCssRule(selector)[0];
-  // var ruleIndex = SlotMachine.findCssRule(selector)[1];
-  // rule.cssText = selector, '{ -webkit-transform: rotateX(' + deg + '); -webkit-transition-duration: ' + duration + 's; transition-duration: ' + duration + 's; }';
-  // console.log(selector, '{ -webkit-transform: rotateX(' + deg + '); -webkit-transition-duration: ' + duration + 's; transition-duration: ' + duration + 's; }');
-  // console.log(rule.cssText);
+SlotMachine.editReelSpinRule = function(angle, duration, selector) {
+  var ruleInfo = SlotMachine.findCssRule(selector);
+  var rule = ruleInfo[0];
+  var ruleIndex = ruleInfo[1];
+  var length = rule.cssText.length;
+  console.log
+  rule.cssText = selector, '{ -webkit-transform: rotateX(' + angle + '); -webkit-transition-duration: ' + duration + 's; transition-duration: ' + duration + 's; }';
+
   // document.styleSheets[0].cssRules[ruleIndex].cssText = rule.cssText;
-  // console.log(document.styleSheets[0].cssRules[ruleIndex].cssText);
+  // console.log(selector, '{ -webkit-transform: rotateX(' + angle + '); -webkit-transition-duration: ' + duration + 's; transition-duration: ' + duration + 's; }');
+  // console.log(rule.cssText);
+  var ruleText = [];  
+  for(var i = 0; i < length; i ++)
+  {
+    keyframeString.push(keyframes[i].keyText); 
+  }
+    
+
+  // delete original rule
+  for (var i = 0, j = ruleText.length; i < j; i ++) {
+    rule.deleteRule(ruleText[i]);
+  }
+
+
+  console.log('editReelSpinRule called on', selector);
+  console.log('The Current Value of the Rule:',document.styleSheets[0].cssRules[ruleIndex].cssText);
 
   // .deleteRule?
   // .insertRule?
 
-  $(selector).css(selector, '{ -webkit-transform: rotateX(' + deg + '); -webkit-transition-duration: ' + duration + 's; transition-duration: ' + duration + 's; }');
 
 };
 
