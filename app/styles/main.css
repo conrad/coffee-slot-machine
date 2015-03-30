@@ -4984,7 +4984,7 @@ body {
   height: 100px;
   width: 140px;
   -webkit-transform-style: preserve-3d;
-  -webkit-animation-timing-function: cubic-bezier(0.77, 0.115, 0.42, 1.04); }
+  -webkit-transition-timing-function: cubic-bezier(0.77, 0.115, 0.42, 1.04); }
 
 .reel > :nth-child(odd) {
   background-color: #5276B2; }
@@ -5015,37 +5015,16 @@ Set up each row to have a different animation duration
 and alternating x-axis rotation directions.
 */
 #reel-1.active {
-  -webkit-animation-name: x-spin;
-  -webkit-animation-duration: 4s; }
+  -webkit-transform: rotateX(1080deg);
+  -webkit-transition-duration: 4s; }
 
 #reel-2.active {
-  -webkit-animation-name: back-x-spin;
-  -webkit-animation-duration: 6s; }
+  -webkit-transform: rotateX(-1800deg);
+  -webkit-transition-duration: 6s; }
 
 #reel-3.active {
-  -webkit-animation-name: x-spin-fast;
-  -webkit-animation-duration: 9s; }
-
-@-webkit-keyframes spin-1 {
-  0% {
-    -webkit-transform: rotateX(0deg); }
-
-  100% {
-    -webkit-transform: rotateX(1080deg); } }
-
-@-webkit-keyframes spin-3 {
-  0% {
-    -webkit-transform: rotateX(0deg); }
-
-  100% {
-    -webkit-transform: rotateX(3600deg); } }
-
-@-webkit-keyframes spin-2 {
-  0% {
-    -webkit-transform: rotateX(1800deg); }
-
-  100% {
-    -webkit-transform: rotateX(0deg); } }
+  -webkit-transform: rotateX(3600deg);
+  -webkit-transition-duration: 9s; }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {

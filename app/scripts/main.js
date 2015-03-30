@@ -110,7 +110,7 @@ SlotMachine.findKeyframesRule = function (rule) {
 
 // Replaces the animation hard coded specifications
 SlotMachine.editKeyFramesRule = function(deg, rule) {
-
+};
 
 
 function change(anim) {
@@ -181,7 +181,7 @@ function change(anim) {
 //   0%    { -webkit-transform: rotateX(1800deg); }
 //   100%  { -webkit-transform: rotateX(0deg); }
 // }
-
+};
 
 
 

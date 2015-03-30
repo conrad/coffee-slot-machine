@@ -109,7 +109,7 @@ body {
   // -webkit-animation-iteration-count: infinite;
   // -webkit-animation-timing-function: linear;
   // -webkit-animation-timing-function: ease-in-out;
-  -webkit-animation-timing-function: cubic-bezier(0.770, 0.115, 0.420, 1.040);
+  -webkit-transition-timing-function: cubic-bezier(0.770, 0.115, 0.420, 1.040);
 }
 
 .reel > :nth-child(odd) {
@@ -162,45 +162,41 @@ Set up each row to have a different animation duration
 and alternating x-axis rotation directions.
 */
 #reel-1.active {
-  -webkit-animation-name: x-spin;
-  -webkit-animation-duration: 4s; 
+  // -webkit-animation-name: spin-1;
+  -webkit-transform: rotateX(1080deg);
+  -webkit-transition-duration: 4s; 
   // -webkit-transform-origin: 50% 50%
 }
 
 #reel-2.active {
-  -webkit-animation-name: back-x-spin;
-  -webkit-animation-duration: 6s;
+  // -webkit-animation-name: spin-2;
+  -webkit-transform: rotateX(-1800deg);
+  -webkit-transition-duration: 6s;
 }
 
 #reel-3.active {
-  -webkit-animation-name: x-spin-fast;
-  -webkit-animation-duration: 9s;
+  // -webkit-animation-name: spin-3;
+  -webkit-transform: rotateX(3600deg);
+  -webkit-transition-duration: 9s;
 }
 
-@-webkit-keyframes spin-1 {                 // x-spin
-  0%    { -webkit-transform: rotateX(0deg); }
-  // 50%   { -webkit-transform: rotateX(180deg); }
-  100%  { -webkit-transform: rotateX(1080deg); }
-}
-
-@-webkit-keyframes spin-3 {               // x-spin-fast
-  0%    { -webkit-transform: rotateX(0deg); }
-  // 50%   { -webkit-transform: rotateX(180deg); }
-  100%  { -webkit-transform: rotateX(3600deg); }
-}
-
-// @-webkit-keyframes x-spin {
+// @-webkit-keyframes spin-1 {                 // x-spin
 //   0%    { -webkit-transform: rotateX(0deg); }
-//   50%   { -webkit-transform: rotateX(180deg); }
-//   100%  { -webkit-transform: rotateX(360deg); }
+//   // 50%   { -webkit-transform: rotateX(180deg); }
+//   100%  { -webkit-transform: rotateX(1080deg); }
 // }
 
-@-webkit-keyframes spin-2 {              // back-x-spin
-  0%    { -webkit-transform: rotateX(1800deg); }
-  // 50%   { -webkit-transform: rotateX(180deg); }
-  100%  { -webkit-transform: rotateX(0deg); }
-}
+// @-webkit-keyframes spin-2 {              // back-x-spin
+//   0%    { -webkit-transform: rotateX(1800deg); }
+//   // 50%   { -webkit-transform: rotateX(180deg); }
+//   100%  { -webkit-transform: rotateX(0deg); }
+// }
 
+// @-webkit-keyframes spin-3 {               // x-spin-fast
+//   0%    { -webkit-transform: rotateX(0deg); }
+//   // 50%   { -webkit-transform: rotateX(180deg); }
+//   100%  { -webkit-transform: rotateX(3600deg); }
+// }
 
 
 /* Responsive: Portrait tablets and up */
