@@ -19,15 +19,21 @@
 
     
     <div class="container">
-        <div class="header">
-            <p><a class="btn btn-lg btn-success pull-right" href="https://github.com/conrad/coffee-slot-machine">See the Source Code</a></p>
-            
+      <div class="header">
+        <div class="btn-group pull-right"> 
+          <p><a class="btn btn-lg btn-success pull-right" href="https://github.com/conrad/coffee-slot-machine">See the Source Code</a></p>
+        </div>
+        <div class="btn-group pull-right"> 
+          <p><p id="mute" class="btn btn-small">Mute</p></p>
+        </div>
+
             <h3 class="text-muted">Coffee Slot Machine</h3>
         </div>
 
         <div class="jumbotron">
             <h1>Hello!</h1>
             <p class="lead">You look ready for some caffeine.</p>
+
             
               <div id="stage">
                 <div id="slot-machine"></div>
@@ -43,24 +49,17 @@
                         </div> -->
 
 
-            <p><p id="play" class="btn btn-lg btn-success" href="#">Play!</p></p>
-        </div>
+            <p><p id="play" class="btn btn-lg btn-success">Play!</p></p>
 
-        <div class="row marketing">
-            <div class="col-lg-6">
-                <h4>How to Play</h4>
-                <p>Push the button.</p>
-
-                <h4>Or you can cheat if you really need it:</h4>
-                <div class="btn-group"> 
-                  <div><a class="btn btn-primary" href="#">Coffee!</a></div>
-                </div>
-                <div class="btn-group"> 
-                  <div><a class="btn btn-warning" href="#">Tea!</a></div>
-                </div>
-                <div class="btn-group"> 
-                  <div><a class="btn inline btn-danger" href="#">Espresso!</a></div>
-                </div>
+            <h4>Or you can cheat if you really need it:</h4>
+            <div class="btn-group"> 
+              <p id="coffee" class="btn btn-primary" href="#">Coffee!</p>
+            </div>
+            <div class="btn-group"> 
+              <p id="tea" class="btn btn-warning" href="#">Tea!</p>
+            </div>
+            <div class="btn-group"> 
+              <p id="espresso" class="btn inline btn-danger" href="#">Espresso!</p>
             </div>
 
         </div>
@@ -81,6 +80,6 @@
     <script src="scripts/main.js"></script>
     <!-- <script>$(function() {SlotMachine.boot($('#slot-machine')); })</script>
     <!-- endbuild -->
-
+    <audio class ="audio-player" name="" src="./assets/win/slot_payoff.wav" ></audio>
 </body>
 </html>
