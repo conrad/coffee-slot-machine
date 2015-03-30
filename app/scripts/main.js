@@ -12,7 +12,7 @@ var SlotMachine = {
 window.SlotMachine = SlotMachine;
 
 
-SlotMachine.setup.place_posters = function(reel, reelNum) {
+SlotMachine.setup.placePosters = function(reel, reelNum) {
   var posterAngle = 360 / SlotMachine.postersPerReel;
 
   for (var i = 0; i < SlotMachine.postersPerReel; i ++) {
@@ -45,9 +45,9 @@ SlotMachine.setup.place_posters = function(reel, reelNum) {
 };
 
 SlotMachine.init = function() {
-  SlotMachine.setup.place_posters(document.getElementById('reel-1'), 1);
-  SlotMachine.setup.place_posters(document.getElementById('reel-2'), 2);
-  SlotMachine.setup.place_posters(document.getElementById('reel-3'), 3);
+  SlotMachine.setup.placePosters(document.getElementById('reel-1'), 1);
+  SlotMachine.setup.placePosters(document.getElementById('reel-2'), 2);
+  SlotMachine.setup.placePosters(document.getElementById('reel-3'), 3);
 };
 
 // call init once the document is fully loaded
@@ -151,7 +151,6 @@ $('#espresso').on('click', function() {
 
 $('#mute').on('click', function() {
   var attr = $('.audio-player').prop('muted');
-  console.log(attr);
   if (!attr) {
     $('.audio-player').prop('muted', true);
   } else {
