@@ -177,13 +177,13 @@ and alternating x-axis rotation directions.
   -webkit-animation-duration: 9s;
 }
 
-@-webkit-keyframes x-spin {
+@-webkit-keyframes spin-1 {                 // x-spin
   0%    { -webkit-transform: rotateX(0deg); }
   // 50%   { -webkit-transform: rotateX(180deg); }
-  100%  { -webkit-transform: rotateX(1000deg); }
+  100%  { -webkit-transform: rotateX(1080deg); }
 }
 
-@-webkit-keyframes x-spin-fast {
+@-webkit-keyframes spin-3 {               // x-spin-fast
   0%    { -webkit-transform: rotateX(0deg); }
   // 50%   { -webkit-transform: rotateX(180deg); }
   100%  { -webkit-transform: rotateX(3600deg); }
@@ -195,7 +195,7 @@ and alternating x-axis rotation directions.
 //   100%  { -webkit-transform: rotateX(360deg); }
 // }
 
-@-webkit-keyframes back-x-spin {
+@-webkit-keyframes spin-2 {              // back-x-spin
   0%    { -webkit-transform: rotateX(1800deg); }
   // 50%   { -webkit-transform: rotateX(180deg); }
   100%  { -webkit-transform: rotateX(0deg); }
