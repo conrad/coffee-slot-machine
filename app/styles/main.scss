@@ -99,17 +99,14 @@ body {
 }
 
 .reel {
-  // margin: 0 auto;
-  // margin: 0 auto 0 90px; 
-  // display: inline;
   float: left;
-  height: 100px;  // must be 
+  height: 100px;  // this height prevents wobbling rotation 
   width: 140px;   // centers reels
   -webkit-transform-style: preserve-3d;
+  -webkit-transition-timing-function: cubic-bezier(0.770, 0.115, 0.420, 1.040);
   // -webkit-animation-iteration-count: infinite;
   // -webkit-animation-timing-function: linear;
   // -webkit-animation-timing-function: ease-in-out;
-  -webkit-transition-timing-function: cubic-bezier(0.770, 0.115, 0.420, 1.040);
 }
 
 .reel > :nth-child(odd) {
@@ -165,7 +162,6 @@ and alternating x-axis rotation directions.
   // -webkit-animation-name: spin-1;
   -webkit-transform: rotateX(1080deg);
   -webkit-transition-duration: 4s; 
-  // -webkit-transform-origin: 50% 50%
 }
 
 #reel-2.active {

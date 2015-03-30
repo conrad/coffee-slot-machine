@@ -49,17 +49,28 @@ SlotMachine.init = function() {
 window.addEventListener('load', SlotMachine.init, false);
 
 // start & stop spinning with play button
+
+
 $('#play').on('click', function(){
+  $('#reel-1').toggleClass('active');
+  $('#reel-2').toggleClass('active');
+  $('#reel-3').toggleClass('active');
   if ( !($('#reel-1').hasClass('active')) ) {
-    $('#reel-1').addClass('active');
-    $('#reel-2').addClass('active');
-    $('#reel-3').addClass('active');
-    setTimeout(function() {
-      $('#reel-1').removeClass('active');
-      $('#reel-2').removeClass('active');
-      $('#reel-3').removeClass('active');
-    }, 9100);
+    $('#play').html('Play!').removeClass('btn-danger').addClass('btn-success');
+  } else {
+    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
   }
+
+  // if ( !($('#reel-1').hasClass('active')) ) {
+  //   $('#reel-1').addClass('active');
+  //   $('#reel-2').addClass('active');
+  //   $('#reel-3').addClass('active');
+  //   $('#play').off('click');
+  //   setTimeout(function() {
+  //     $('#reel-1').removeClass('active');
+  //     $('#reel-2').removeClass('active');
+  //     $('#reel-3').removeClass('active');
+  //   }, 9100);
 });
 
 SlotMachine.play = function() {
@@ -75,44 +86,73 @@ SlotMachine.play = function() {
   console.log(final1, final2, final3);
   // var degArr = [deg1, deg2, deg3];
   // other arguments???
-  SlotMachine.editKeyFramesRules(deg1, 'spin-1');
-  SlotMachine.editKeyFramesRules(deg2, 'spin-2');
-  SlotMachine.editKeyFramesRules(deg3, 'spin-3');
+  // SlotMachine.editKeyFramesRules(deg1, 'spin-1');
+  // SlotMachine.editKeyFramesRules(deg2, 'spin-2');
+  // SlotMachine.editKeyFramesRules(deg3, 'spin-3');
 
-  // add .active to each reel
+  // Having trouble making this work because there the setter for cssText isn't working properly... need a workaround (CSSOM?)
+  SlotMachine.editReelSpinRule(deg1, 4, '#reel-1.active');
+  SlotMachine.editReelSpinRule(deg2, 7, '#reel-2.active');
+  SlotMachine.editReelSpinRule(deg3, 10, '#reel-3.active');
+
 
   if (final1 % 3 === final2 % 3 && final1 % 3 === final3 % 3) {
     // win
+    if (final1 % 3 === 0) {
+      // coffee
+      SlotMachine.win.coffee();
+    } else if (final1 % 3 === 1) {
+      // tea
+      SlotMachine.win.tea();
+    } else if (final1 % 3 === 2) {
+      // espresso
+      SlotMachine.win.espresso();
+    }
   }
-
-
 };
 
 
 
 // find the desired keyFrames rules in CSS to control outcomes dynamically
   // rules: 'spin-1', 'spin-2', & 'spin-3'
-SlotMachine.findKeyframesRule = function (rule) {
+SlotMachine.findCssRule = function (selector) {
     // cross-browser CSS rule object
     if (document.styleSheets[0].cssRules) {
       var rules = document.styleSheets[0].cssRules;
     } else if (document.styleSheets[0].rules) {
       var rules = document.styleSheets[0].rules;
     }
+
     for (var j = 0; j < rules.length; ++j) {
-        if (rules[j].type == window.CSSRule.WEBKIT_KEYFRAMES_RULE && rules[j].name == rule) { return rules[j]; 
-        }
+      if (rules[j].selectorText === selector) {
+        return [rules[j], j];
+      }
     }
     return null;
-}
-
-
-
-// Replaces the animation hard coded specifications
-SlotMachine.editKeyFramesRule = function(deg, rule) {
 };
 
 
+// Replaces the animation hard-coded specifications
+SlotMachine.editReelSpinRule = function(deg, duration, selector) {
+  // var rule = SlotMachine.findCssRule(selector)[0];
+  // var ruleIndex = SlotMachine.findCssRule(selector)[1];
+  // rule.cssText = selector, '{ -webkit-transform: rotateX(' + deg + '); -webkit-transition-duration: ' + duration + 's; transition-duration: ' + duration + 's; }';
+  // console.log(selector, '{ -webkit-transform: rotateX(' + deg + '); -webkit-transition-duration: ' + duration + 's; transition-duration: ' + duration + 's; }');
+  // console.log(rule.cssText);
+  // document.styleSheets[0].cssRules[ruleIndex].cssText = rule.cssText;
+  // console.log(document.styleSheets[0].cssRules[ruleIndex].cssText);
+
+  // .deleteRule?
+  // .insertRule?
+
+  $(selector).css(selector, '{ -webkit-transform: rotateX(' + deg + '); -webkit-transition-duration: ' + duration + 's; transition-duration: ' + duration + 's; }');
+
+};
+
+
+
+
+// This is purely for education
 function change(anim) {
   // Obtains the animation object of the specified
   // animation
@@ -186,6 +226,9 @@ function change(anim) {
 
 
 
+
+
+
 SlotMachine.images = {
   1: [
     './assets/reel1/coffee-maker2.png',
@@ -207,6 +250,24 @@ SlotMachine.images = {
 SlotMachine.pickPoster = function(reelNum, imageSet) {
   // console.log('reelNum', reelNum, 'imageSet', imageSet, 'image string', SlotMachine.images[reelNum][imageSet]);
   return SlotMachine.images[reelNum][imageSet];
-}
+};
+
+
+SlotMachine.win.coffee = function() {
+  // put some good stuff in here. jQuery, gifs, ...
+  console.log('Win Coffee!');
+};
+
+SlotMachine.win.tea = function() {
+  // put some good stuff in here. jQuery, gifs, 
+  console.log('Win Tea!');
+  
+};
+
+SlotMachine.win.espresso = function() {
+  // put some good stuff in here. jQuery, gifs, 
+  console.log('Win Espresso!');
+};
+
 
 // })();
