@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon app.js",
-    "postinstall": "gulp install && gulp"
+    "postinstall": "bower install && gulp"
   },
   "dependencies": {
     "connect": "^3.3.2",
