@@ -2,35 +2,6 @@
 
 var gulp = require('gulp');
 
-// var connect = require('gulp-connect');
-
-// var paths = {
-//   views: ['./app/*.html'],
-//   scripts: ['./app/*/**.js']
-// };
-
-// gulp.task('connect', function() {
-//   connect.server({
-//     app:[__dirname],
-//     port: 3000,
-//     livereload: true
-//   });
-// });
-
-// gulp.task('html', function() {
-//   gulp.src(paths.views)
-//     .pipe(connect.reload());
-// });
-
-// gulp.task('scripts', function() {
-//   gulp.src(paths.scripts)
-//     .pipe(connect.reload());
-// });
-
-
-gulp.task('clean', function (cb) {
-    require('rimraf')('dist', cb);
-});
 
 gulp.task('lint', function () {
     var jshint = require('gulp-jshint');
@@ -143,6 +114,7 @@ gulp.task('serve', ['styles', 'connect'], function () {
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'move']);
 
+// gulp.task('default', ['clean'], function () {
 gulp.task('default', ['clean', 'serve'], function () {
     gulp.start('build');
 });
