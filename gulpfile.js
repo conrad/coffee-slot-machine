@@ -18,7 +18,7 @@ var connect = require('connect');
 var serveStatic = require('serve-static');
 var serveIndex = require('serve-index');
 
-
+var port = 4545;
 
 gulp.task('clean', function (cb) {
   clean('dist', cb);
@@ -109,9 +109,9 @@ gulp.task('connect', function () {
         .use(serveIndex('dist'));
 
     require('http').createServer(app)
-        .listen(9000)
+        .listen(port)
         .on('listening', function() {
-            console.log('Started connect web server on http://localhost:9000.');
+            console.log('Started connect web server on http://localhost:',port);
         });
 });
 
@@ -119,7 +119,7 @@ gulp.task('serve', ['styles', 'connect'], function () {
 
     livereload.listen();
 
-    require('opn')('http://localhost:9000');
+    require('opn')('http://localhost:' + port);
     
     gulp.watch('app/styles/**/*.scss', ['styles']);
     gulp.watch('bower.json', ['wiredep']);

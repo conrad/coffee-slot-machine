@@ -108,7 +108,7 @@ SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure,
 
   if (id === 'congrats') {
     elem.className = 'jumbotron shadowed';
-    elem.innerHTML = '<h1>Yes!</h1><h2>You won ' + message + '!</h2>';
+    elem.innerHTML = '<div class="congrats-text"><h1>Yes!</h1><h2>You won ' + message + '!</h2></div>';
     elem.style.color = 'white';
   }
 
@@ -219,9 +219,9 @@ SlotMachine.win.coffee = function() {
   $('.audio-player')[0].play();
 
   // dur, id, tag, w, h, t, b, l, r, z, measurement, path
-  var congrats = SlotMachine.fadeInElem(500, 'congrats', 'div', 300, 240, 'px', 20, null, 35, null, 9, '%', 'COFFEE');
+  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 500, 391, 'px', 40, null, 50, null, 10, '%', 'COFFEE');
 
-  var cooper = SlotMachine.fadeInElem(3500, 'cooper', 'img', 305, 342, 'px', null, -27, 0, null, 10, 'px', null, '../assets/win/coffee/cooper-thumbs-up.png');
+  var cooper = SlotMachine.fadeInElem(3500, 'cooper', 'img', 305, 342, 'px', null, -27, 0, null, 11, 'px', null, '../assets/win/coffee/cooper-thumbs-up.png');
 
   var audio = new Audio("../assets/win/coffee/damn-fine-coffee.mp3");
   document.body.appendChild(audio);
@@ -251,51 +251,22 @@ SlotMachine.win.tea = function() {
 
   // dur, id, tag, w, h, t, b, l, r, z, measurement, path
 
-  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 300, 230, 'px', 15, null, 30, null, 11, '%', 'all the tea');
+  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 500, 391, 'px', 40, null, 50, null, 11, '%', 'all the tea');
 
   var container = document.getElementsByClassName('container')[0];
-  var ozzy = document.createElement('img');
-  var slash = document.createElement('img');
 
-  $(ozzy).appendTo(container);
-  $(slash).appendTo(container);
+  SlotMachine.fadeInElem(3000, 'ozzy', 'img', 317, 387, 'px', null, -13, -20, null, 13, 'px', null, '../assets/win/tea/ozzy.png');
 
-
-  // SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure, top, bottom, left, right, z, placeMeasure, message, imagePath) 
-
-  // SlotMachine.fadeInElem(2, 'ozzy', 'img', 500, 500, 'px', 0, null, 0, null, 13, 'px', null, '../assets/win/tea/ozzy.png');
-
-  //   var container = document.getElementsByClassName('container')[0];
-  //   var elem = document.createElement(tag);
-  //   $(elem).hide().appendTo(container).fadeIn(duration).css({
-  //     width    : width  + sizeMeasure,
-  //     height   : height + sizeMeasure,
-  //     top      : top    + placeMeasure,
-  //     bottom   : bottom + placeMeasure,
-  //     left     : left   + placeMeasure,
-  //     right    : right  + placeMeasure,
-  //     zIndex   : z,
-  //     position : 'fixed',
-  //   });
-  //   // elem.id = className;
-  //   elem.setAttribute("id", id);
-  //   if (tag === 'img') { 
-  //     elem.src = imagePath;
-  //   }
-
+  SlotMachine.fadeInElem(5500, 'slash', 'img', 165, 413, 'px', null, -24, null, -30, 12, 'px', null, '../assets/win/tea/slash.png');
 
 
   // Remove these divs
   setTimeout( function() {
     SlotMachine.fadeNRemove(1500, congrats);
-    // SlotMachine.fadeNRemove(2500, ozzy);
-    // SlotMachine.fadeNRemove(4500, slash);
+    SlotMachine.fadeNRemove(4500, ozzy);
+    SlotMachine.fadeNRemove(8500, slash);
     SlotMachine.won = false;
   }, 6000);  
-
-  // setTimeout(function() {
-  //   // audio.parentNode.removeChild(audio);
-  // }, 20000);
 
 };
 
@@ -306,9 +277,9 @@ SlotMachine.win.espresso = function() {
   $('.audio-player')[0].play();
 
   // dur, id, tag, w, h, sizeMeasure, t, b, l, r, placeMeasure, z, message, path
-  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 300, 240, 'px', 20, null, 20, null, 11, '%', 'ESPRESSO');
+  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 500, 391, 'px', 40, null, 50, null, 10, '%', 'ESPRESSO');
 
-  var kanye = SlotMachine.fadeInElem(1000, 'kanye', 'img', 466, 698, 'px', 20, null, null, 100, 10, 'px', null, '../assets/win/espresso/kanye-suit.gif');
+  var kanye = SlotMachine.fadeInElem(1000, 'kanye', 'img', 466, 698, 'px', null, 0, null, -55, 11, 'px', null, '../assets/win/espresso/kanye-suit.gif');
 
   var audio = new Audio("../assets/win/espresso/stronger.mp3");
   document.body.appendChild(audio);
@@ -342,7 +313,7 @@ $('#play').on('click', function() {
     SlotMachine.play();
     SlotMachine.played = true;
     $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
-  } else {
+  } else if (!SlotMachine.won) {
     SlotMachine.spinReel('#reel-1', 0, 0.25);
     SlotMachine.spinReel('#reel-2', 30, 0.5);
     SlotMachine.spinReel('#reel-3', 60, 0.75);

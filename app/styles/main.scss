@@ -154,41 +154,52 @@ body {
 }
 
 #congrats {
-  background-color: #333333;
-  overflow-y: scroll;
-  // overflow: hidden;  
+  background: url('../assets/win/flashing-lights-radiant-image.gif');
+  vertical-align: middle;
+  overflow-y: scroll; 
+  // top: 50%;
+  // left: 50%;
+  margin-top: -190px;
+  margin-left: -250px;
+  display: table;
 }
+.congrats-text {
+  vertical-align: middle;
+  display: table-cell;  
+}
+
+
 #cooper, 
 #kanye {
   cursor: pointer;
 }
 
-#ozzy {
-  position: fixed;
-  width: 317px;
-  height: 387px;
-  background: url('../assets/win/tea/ozzy.png') no-repeat;
-  top: 0;
-  left: 0;
-  z-index: 13;
+// #ozzy {
+//   position: fixed;
+//   width: 317px;
+//   height: 387px;
+//   background: url('../assets/win/tea/ozzy.png') no-repeat;
+//   top: 0;
+//   left: 0;
+//   z-index: 13;
 
   // -webkit-transform: translateX(-350px);
   // -moz-transform:    translateX(-350px);
   // -ms-transform:     translateX(-350px);
   // -o-transform:      translateX(-350px);
   // transform:         translateX(-350px);
-}
+// }
 
-#slash {
-  position: fixed;
-  width: 165px;
-  height: 413px;
-  background: url('../assets/win/tea/slash.png') no-repeat;
-  // background-image: '../assets/win/tea/slash.jpg';
-  top: 0;
-  right: 5px;
-  z-index: 9;
-}
+// #slash {
+//   position: fixed;
+//   width: 165px;
+//   height: 413px;
+//   background: url('../assets/win/tea/slash.png') no-repeat;
+//   // background-image: '../assets/win/tea/slash.jpg';
+//   top: 0;
+//   right: 5px;
+//   z-index: 9;
+// }
 
 .shadowed{
   -webkit-box-shadow: 5px 6px #aaa; 
