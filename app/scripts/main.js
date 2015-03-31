@@ -6,6 +6,7 @@ var SlotMachine = {
   spinTime: 5,
   degCorrection: 1,
   played: false,
+  muted: false,
   setup: {},
   win: {}         // organizational objects
 
@@ -153,13 +154,15 @@ $('#espresso').on('click', function() {
 });
 
 $('#mute').on('click', function() {
-  var attr = $('.audio-player').prop('muted');
-  if (!attr) {
+  // var attr = $('.audio-player').prop('muted');
+  if (!SlotMachine.muted) {
     $('.audio-player').prop('muted', true);
     $('#mute').html('UnMute');
+    SlotMachine.muted = true;
   } else {
     $('.audio-player').prop('muted', false);
     $('#mute').html('Mute');
+    SlotMachine.muted = false;
   }
 });
 
@@ -191,32 +194,32 @@ SlotMachine.pickPoster = function(reelNum, imageSet) {
 
 SlotMachine.win.coffee = function() {
   // put some good stuff in here. jQuery, gifs, ...
-    console.log('Win Coffee!');
-    $('.audio-player')[0].play();
+  console.log('Win Coffee!');
+  $('.audio-player')[0].play();
 
-    var cooper = SlotMachine.addElemForFade('cooper', '../assets/win/coffee/cooper-thumbs-up.png');
-    var audio = new Audio("../assets/win/coffee/damn-fine-coffee.mp3");
-    // var cooper2 = document.getElementsByClassName('cooper')[0];
-    // cooper.onclick=audio.play;
-    // cooper2.addEventListener('click', audio.play, false);
-    // document.getElementsByClassName('cooper')[0].addEventListener('click', audio.play, false);
-    // $('.cooper').on('click', audio.play);
+  // dur, id, tag, w, h, t, b, l, r, z, measurement, path
+  var congrats = SlotMachine.fadeInElem(500, 'congrats', 'div', 60, 30, 20, null, 20, null, 9, '%');
 
-    setTimeout( function() {
-      $(cooper).fadeOut(2000);
-      setTimeout( function() {
-        cooper.parentNode.removeChild(cooper);
-      }, 2000);
-    }, 5000);
-    
+  var cooper = SlotMachine.fadeInElem(3500, 'cooper', 'img', 305, 342, null, -27, 0, null, 10, 'px', '../assets/win/coffee/cooper-thumbs-up.png');
 
-    // audio.loop = false;
+  var audio = new Audio("../assets/win/coffee/damn-fine-coffee.mp3");
+  document.body.appendChild(audio);
+  audio.className = 'cooper-audio';
+  $('#cooper').on('click', function() {
+    if (!SlotMachine.muted) {
+      $('.cooper-audio')[0].play();
+    }
+  })
 
-    // audio.onended = function(){
-    // audio.play();
-    // }
-     // = document.getElementsByClassName('container')[0];
+  // Remove these divs
+  setTimeout( function() {
+    SlotMachine.fadeNRemove(2000, cooper);
+    SlotMachine.fadeNRemove(1500, congrats);
+  }, 6500);  
 
+  setTimeout(function() {
+    audio.parentNode.removeChild(audio);
+  }, 15000);
 };
 
 SlotMachine.win.tea = function() {
@@ -224,30 +227,63 @@ SlotMachine.win.tea = function() {
   console.log('Win Tea!');
   $('.audio-player')[0].play();
 
+  // dur, id, tag, w, h, t, b, l, r, z, measurement, path
+  var congrats = SlotMachine.fadeInElem(1500, 'congrats', 'div', 60, 30, 20, null, 20, null, 11, '%');
+
+
 };
+
 
 SlotMachine.win.espresso = function() {
   // put some good stuff in here. jQuery, gifs, 
   console.log('Win Espresso!');
   $('.audio-player')[0].play();
+
+  // dur, id, tag, w, h, t, b, l, r, z, measurement, path
+  var congrats = SlotMachine.fadeInElem(1500, 'congrats', 'div', 60, 30, 20, null, 20, null, 11, '%');
+
+
+  var kanye = SlotMachine.fadeInElem('kanye', '../assets/win/espresso/kanye-suit.gif');
+
 };
 
 
-SlotMachine.addElemForFade = function(className, imagePath) {
+SlotMachine.fadeInElem = function(duration, id, tag, width, height, top, bottom, left, right, z, measurement, imagePath) {
   var container = document.getElementsByClassName('container')[0];
-  // console.log(container);
-  // var elem = document.createElement("div");
-  var elem = document.createElement("img");
-  // container.appendChild(elem);
-  // elem.style.opacity = 0;
-  $(elem).hide().appendTo(container).fadeIn(3500);
-  elem.src = imagePath;
-  elem.className = className;
+  var elem = document.createElement(tag);
+  $(elem).hide().appendTo(container).fadeIn(duration).css({
+    width    : width  + measurement,
+    height   : height + measurement,
+    top      : top    + measurement,
+    bottom   : bottom + measurement,
+    left     : left   + measurement,
+    right    : right  + measurement,
+    zIndex   : z,
+    position : 'fixed',
+  });
+  // elem.id = className;
+  elem.setAttribute("id", id);
+  if (tag === 'img') { 
+    elem.src = imagePath;
+  }
 
-  // window.getComputedStyle(elem).opacity;   // apply initial state
-  // elem.style.opacity = 1;     // Fade it in.
+  if (id === 'congrats') {
+    elem.className = 'jumbotron shadowed';
+    elem.innerHTML = '<h1>Yes!</h1><h2>You won COFFEE!</h2>';
+    elem.style.color = 'white';
+    var shadow = '2px';
+  }
+
   return elem;
 };
+
+SlotMachine.fadeNRemove = function(duration, elem) {
+  $(elem).fadeOut(duration);
+  setTimeout( function() {
+    elem.parentNode.removeChild(elem);
+  }, duration);
+};
+
 
 
 // })();
