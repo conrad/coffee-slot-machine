@@ -208,9 +208,9 @@ SlotMachine.win.coffee = function() {
   $('.audio-player')[0].play();
 
   // dur, id, tag, w, h, t, b, l, r, z, measurement, path
-  var congrats = SlotMachine.fadeInElem(500, 'congrats', 'div', 60, 30, 20, null, 20, null, 9, '%', 'COFFEE');
+  var congrats = SlotMachine.fadeInElem(500, 'congrats', 'div', 300, 240, 'px', 20, null, 35, null, 9, '%', 'COFFEE');
 
-  var cooper = SlotMachine.fadeInElem(3500, 'cooper', 'img', 305, 342, null, -27, 0, null, 10, 'px', null, '../assets/win/coffee/cooper-thumbs-up.png');
+  var cooper = SlotMachine.fadeInElem(3500, 'cooper', 'img', 305, 342, 'px', null, -27, 0, null, 10, 'px', null, '../assets/win/coffee/cooper-thumbs-up.png');
 
   var audio = new Audio("../assets/win/coffee/damn-fine-coffee.mp3");
   document.body.appendChild(audio);
@@ -251,10 +251,10 @@ SlotMachine.win.espresso = function() {
   console.log('Win Espresso!');
   $('.audio-player')[0].play();
 
-  // dur, id, tag, w, h, t, b, l, r, z, measurement, message, path
-  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 60, 30, 20, null, 20, null, 11, '%', 'ESPRESSO');
+  // dur, id, tag, w, h, sizeMeasure, t, b, l, r, placeMeasure, z, message, path
+  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 300, 240, 'px', 20, null, 20, null, 11, '%', 'ESPRESSO');
 
-  var kanye = SlotMachine.fadeInElem(1000, 'kanye', 'img', 466, 698, 20, null, null, 100, 10, 'px', null, '../assets/win/espresso/kanye-suit.gif');
+  var kanye = SlotMachine.fadeInElem(1000, 'kanye', 'img', 466, 698, 'px', 20, null, null, 100, 10, 'px', null, '../assets/win/espresso/kanye-suit.gif');
 
   var audio = new Audio("../assets/win/espresso/stronger.mp3");
   document.body.appendChild(audio);
@@ -278,16 +278,16 @@ SlotMachine.win.espresso = function() {
 };
 
 
-SlotMachine.fadeInElem = function(duration, id, tag, width, height, top, bottom, left, right, z, measurement, message, imagePath) {
+SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure, top, bottom, left, right, z, placeMeasure, message, imagePath) {
   var container = document.getElementsByClassName('container')[0];
   var elem = document.createElement(tag);
   $(elem).hide().appendTo(container).fadeIn(duration).css({
-    width    : width  + measurement,
-    height   : height + measurement,
-    top      : top    + measurement,
-    bottom   : bottom + measurement,
-    left     : left   + measurement,
-    right    : right  + measurement,
+    width    : width  + sizeMeasure,
+    height   : height + sizeMeasure,
+    top      : top    + placeMeasure,
+    bottom   : bottom + placeMeasure,
+    left     : left   + placeMeasure,
+    right    : right  + placeMeasure,
     zIndex   : z,
     position : 'fixed',
   });

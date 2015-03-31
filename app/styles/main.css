@@ -5013,10 +5013,7 @@ body {
   background-color: #333333;
   overflow-y: scroll; }
 
-#cooper {
-  cursor: pointer; }
-
-#kanye {
+#cooper, #kanye {
   cursor: pointer; }
 
 .shadowed {
