@@ -1,57 +1,81 @@
 'use strict';
 
 var gulp = require('gulp');
+var shell = require('gulp-shell');
+var jshint = require('gulp-jshint');
+var clean = require('rimraf');
+var sass = require('gulp-sass');
+var cache = require('gulp-cache');
+var imagemin = require('gulp-imagemin');
+var uglify = require('gulp-uglify');
+var minifyCss = require('gulp-minify-css');
+var useref = require('gulp-useref');
+var assets = useref.assets();
+var gulpif = require('gulp-if');
+var livereload = require('gulp-livereload');
+var wiredep = require('wiredep').stream;
+var connect = require('connect');
+var serveStatic = require('serve-static');
+var serveIndex = require('serve-index');
 
+
+// the paths to our app files
+var paths = {
+  // not including 3rd party js files
+  scripts: ['app/**/*.js'],
+  html: ['app/**/*.html', 'client/index.html'],
+  styles: ['app/styles/main.css'],
+  server: ['server/**/*.js'],
+  sass: ['app/styles/**/*.scss']
+};
+
+
+gulp.task('install', shell.task([
+  'npm install',
+  'bower install'
+]));
+
+gulp.task('clean', function (cb) {
+  clean('dist', cb);
+});
 
 gulp.task('lint', function () {
-    var jshint = require('gulp-jshint');
-
-    return gulp.src('app/scripts/**/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+  return gulp.src('app/scripts/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
 
 gulp.task('styles', function () {
-    var sass = require('gulp-sass');
-
-    return gulp.src('app/styles/*.scss')
-        .pipe(sass({
-            precision: 10
-        }))
-        .pipe(gulp.dest('app/styles'));
+  return gulp.src('app/styles/*.scss')
+    .pipe(sass({
+      precision: 10
+    }))
+    .pipe(gulp.dest('dist/styles'));
 });
 
 gulp.task('images', function () {
-    var cache = require('gulp-cache'),
-        imagemin = require('gulp-imagemin');
-
-    return gulp.src('app/images/**/*')
-        .pipe(cache(imagemin({
-            progressive: true,
-            interlaced: true
-        })))
-        .pipe(gulp.dest('dist/images'));
+  return gulp.src('app/assets/**/*')
+    .pipe(cache(imagemin({
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/assets'));
 });
 
 gulp.task('fonts', function () {
-    return gulp.src('app/styles/fonts/*')
-        .pipe(gulp.dest('dist/styles/fonts'));
+  return gulp.src('app/styles/fonts/*')
+    .pipe(gulp.dest('dist/styles/fonts'));
 });
 
 gulp.task('move', function () {
-    return gulp.src([
-            'app/*.{ico,png,txt}',
-            'app/.htaccess'
-        ])
-        .pipe(gulp.dest('dist'));
+  return gulp.src([
+    'app/*.{ico,png,txt}',
+    'app/scripts/main.js',
+    'app/.htaccess'])
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('html', ['styles'], function () {
-    var uglify = require('gulp-uglify'),
-        minifyCss = require('gulp-minify-css'),
-        useref = require('gulp-useref'),
-        gulpif = require('gulp-if'),
-        assets = useref.assets();
 
     return gulp.src('app/*.html')
         .pipe(assets)
@@ -63,7 +87,6 @@ gulp.task('html', ['styles'], function () {
 });
 
 gulp.task('wiredep', function () {
-    var wiredep = require('wiredep').stream;
 
     gulp.src('app/styles/*.scss')
         .pipe(wiredep({
@@ -79,9 +102,6 @@ gulp.task('wiredep', function () {
 });
 
 gulp.task('connect', function () {
-    var connect = require('connect');
-    var serveStatic = require('serve-static');
-    var serveIndex = require('serve-index');
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
         .use(serveStatic('app'))
@@ -95,7 +115,6 @@ gulp.task('connect', function () {
 });
 
 gulp.task('serve', ['styles', 'connect'], function () {
-    var livereload = require('gulp-livereload');
 
     livereload.listen();
 
@@ -105,7 +124,7 @@ gulp.task('serve', ['styles', 'connect'], function () {
         'app/*.html',
         'app/styles/**/*.css',
         'app/scripts/**/*.js',
-        'app/images/**/*'
+        'app/assets/**/*'
     ]).on('change', livereload.changed);
     
     gulp.watch('app/styles/**/*.scss', ['styles']);
@@ -114,7 +133,7 @@ gulp.task('serve', ['styles', 'connect'], function () {
 
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'move']);
 
-// gulp.task('default', ['clean'], function () {
-gulp.task('default', ['clean', 'serve'], function () {
+gulp.task('default', ['clean'], function () {
+// gulp.task('default', ['clean', 'serve'], function () {
     gulp.start('build');
 });
