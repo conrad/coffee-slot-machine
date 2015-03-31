@@ -1,5 +1,5 @@
 // main.js
-// $(function() {
+
 var SlotMachine = {
   setup: {},
   postersPerReel: 12,
@@ -15,8 +15,10 @@ var SlotMachine = {
 window.SlotMachine = SlotMachine;
 
 
+/////////////////////////
+// SETUP METHODS
+/////////////////////////
 
-// Setup methods
 SlotMachine.setup.placePosters = function(reel, reelNum) {
   var posterAngle = 360 / SlotMachine.postersPerReel;
 
@@ -79,66 +81,6 @@ SlotMachine.init = function() {
 
 // call init once the document is fully loaded
 window.addEventListener('load', SlotMachine.init, false);
-
-
-
-/////////////////////////
-// GAMEPLAY METHODS
-/////////////////////////
-
-SlotMachine.spinReel = function(selector, angle, duration) {
-  var easing = 'cubic-bezier(0.535, 0.300, 0.615, 1.040)';
-  var spin = 'rotateX(' + angle + 'deg)';
-  // console.log('spinReel called with', selector, angle, duration);
-  $(selector).css({
-      transform        : spin,
-      WebkitTransform  : spin,
-      MozTransform     : spin,
-      msTransform      : spin,
-      OTransform       : spin,
-
-      transition       : duration + 's ' + easing,
-      WebkitTransition : duration + 's ' + easing,
-      MozTransition    : duration + 's ' + easing,
-      msTransition     : duration + 's ' + easing,
-      OTransition      : duration + 's ' + easing
-  });
-};
-
-
-SlotMachine.play = function() {
-  // create a final poster and its degrees for each reel
-    // order: 0 coffee, 1 tea, 2 espresso, 3 coffee, 4 tea, 5 espresso, 6 coffee, 7 tea, 8 espresso, 9 coffee, 10 tea, 11 espresso
-  var final1 = Math.ceil(Math.random() * 12);
-  var final2 = Math.ceil(Math.random() * 12);
-  var final3 = Math.ceil(Math.random() * 12);
-  // console.log(final1, final2, final3);
-  var angle1 = (final1 * 30 * SlotMachine.degCorrection) + 720; 
-  var angle2 = (final2 * 30 * SlotMachine.degCorrection) + 1800; 
-  var angle3 = (final3 * 30 * SlotMachine.degCorrection) + 3240; 
-
-  SlotMachine.spinReel('#reel-1', angle1, SlotMachine.spinTime / 2);
-  SlotMachine.spinReel('#reel-2', angle2, SlotMachine.spinTime / 1.5);
-  SlotMachine.spinReel('#reel-3', angle3, SlotMachine.spinTime);
-
-  if (final1 % 3 === final2 % 3 && final1 % 3 === final3 % 3) {    // win
-    // Wait until reels are done spinning
-    
-    // var delay = ; 
-
-    setTimeout(function() {
-      // console.log('You won... delay:', delay)
-      if (final1 % 3 === 0) {             // coffee
-        SlotMachine.win.coffee();
-      } else if (final1 % 3 === 1) {      // tea      
-        SlotMachine.win.espresso();
-      } else if (final1 % 3 === 2) {      // espresso
-        SlotMachine.win.tea();
-      }
-    }, (SlotMachine.spinTime * 1000) );
-  }
-
-};
 
 
 /////////////////////////
@@ -206,6 +148,65 @@ SlotMachine.slideInElem = function (className, direction, duration, delay) {
       OTransitionDelay : delay + 's'
 
   });
+};
+
+
+/////////////////////////
+// GAMEPLAY METHODS
+/////////////////////////
+
+SlotMachine.spinReel = function(selector, angle, duration) {
+  var easing = 'cubic-bezier(0.535, 0.300, 0.615, 1.040)';
+  var spin = 'rotateX(' + angle + 'deg)';
+  // console.log('spinReel called with', selector, angle, duration);
+  $(selector).css({
+      transform        : spin,
+      WebkitTransform  : spin,
+      MozTransform     : spin,
+      msTransform      : spin,
+      OTransform       : spin,
+
+      transition       : duration + 's ' + easing,
+      WebkitTransition : duration + 's ' + easing,
+      MozTransition    : duration + 's ' + easing,
+      msTransition     : duration + 's ' + easing,
+      OTransition      : duration + 's ' + easing
+  });
+};
+
+
+SlotMachine.play = function() {
+  // create a final poster and its degrees for each reel
+    // order: 0 coffee, 1 tea, 2 espresso, 3 coffee, 4 tea, 5 espresso, 6 coffee, 7 tea, 8 espresso, 9 coffee, 10 tea, 11 espresso
+  var final1 = Math.ceil(Math.random() * 12);
+  var final2 = Math.ceil(Math.random() * 12);
+  var final3 = Math.ceil(Math.random() * 12);
+  // console.log(final1, final2, final3);
+  var angle1 = (final1 * 30 * SlotMachine.degCorrection) + 720; 
+  var angle2 = (final2 * 30 * SlotMachine.degCorrection) + 1800; 
+  var angle3 = (final3 * 30 * SlotMachine.degCorrection) + 3240; 
+
+  SlotMachine.spinReel('#reel-1', angle1, SlotMachine.spinTime / 2);
+  SlotMachine.spinReel('#reel-2', angle2, SlotMachine.spinTime / 1.5);
+  SlotMachine.spinReel('#reel-3', angle3, SlotMachine.spinTime);
+
+  if (final1 % 3 === final2 % 3 && final1 % 3 === final3 % 3) {    // win
+    // Wait until reels are done spinning
+    
+    // var delay = ; 
+
+    setTimeout(function() {
+      // console.log('You won... delay:', delay)
+      if (final1 % 3 === 0) {             // coffee
+        SlotMachine.win.coffee();
+      } else if (final1 % 3 === 1) {      // tea      
+        SlotMachine.win.espresso();
+      } else if (final1 % 3 === 2) {      // espresso
+        SlotMachine.win.tea();
+      }
+    }, (SlotMachine.spinTime * 1000) );
+  }
+
 };
 
 /////////////////////////
@@ -292,9 +293,9 @@ SlotMachine.win.tea = function() {
     SlotMachine.won = false;
   }, 6000);  
 
-  setTimeout(function() {
-    // audio.parentNode.removeChild(audio);
-  }, 20000);
+  // setTimeout(function() {
+  //   // audio.parentNode.removeChild(audio);
+  // }, 20000);
 
 };
 
@@ -398,5 +399,3 @@ $('#mute').on('click', function() {
     SlotMachine.muted = false;
   }
 });
-
-// })();
