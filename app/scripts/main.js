@@ -77,8 +77,15 @@ SlotMachine.init = function() {
   SlotMachine.setup.placePosters(document.getElementById('reel-3'), 3);
 };
 
+// call init once the document is fully loaded
+window.addEventListener('load', SlotMachine.init, false);
 
-// Gameplay methods
+
+
+/////////////////////////
+// GAMEPLAY METHODS
+/////////////////////////
+
 SlotMachine.spinReel = function(selector, angle, duration) {
   var easing = 'cubic-bezier(0.535, 0.300, 0.615, 1.040)';
   var spin = 'rotateX(' + angle + 'deg)';
@@ -134,77 +141,76 @@ SlotMachine.play = function() {
 };
 
 
-// call init once the document is fully loaded
-window.addEventListener('load', SlotMachine.init, false);
+/////////////////////////
+// ANIMATION METHODS
+/////////////////////////
 
-// Play when play button is clicked
-$('#play').on('click', function() {
-  if (!SlotMachine.played & !SlotMachine.won) {
-    SlotMachine.play();
-    SlotMachine.played = true;
-    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
-  } else {
-    SlotMachine.spinReel('#reel-1', 0, 0.25);
-    SlotMachine.spinReel('#reel-2', 30, 0.5);
-    SlotMachine.spinReel('#reel-3', 60, 0.75);
-    SlotMachine.played = false;
-    $('#play').html('Play!').removeClass('btn-danger').addClass('btn-success');
+SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure, top, bottom, left, right, z, placeMeasure, message, imagePath) {
+  var container = document.getElementsByClassName('container')[0];
+  var elem = document.createElement(tag);
+  $(elem).hide().appendTo(container).fadeIn(duration).css({
+    width    : width  + sizeMeasure,
+    height   : height + sizeMeasure,
+    top      : top    + placeMeasure,
+    bottom   : bottom + placeMeasure,
+    left     : left   + placeMeasure,
+    right    : right  + placeMeasure,
+    zIndex   : z,
+    position : 'fixed',
+  });
+  // elem.id = className;
+  elem.setAttribute("id", id);
+  if (tag === 'img') { 
+    elem.src = imagePath;
   }
-});
 
-$('#coffee').on('click', function() {
-  if (!SlotMachine.won) {
-    SlotMachine.spinReel('#reel-1', 360 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.spinReel('#reel-2', 360 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.spinReel('#reel-3', 360 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.win.coffee();
-    SlotMachine.played = true;
-    SlotMachine.won = true;
-    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  if (id === 'congrats') {
+    elem.className = 'jumbotron shadowed';
+    elem.innerHTML = '<h1>Yes!</h1><h2>You won ' + message + '!</h2>';
+    elem.style.color = 'white';
   }
-});
 
-$('#tea').on('click', function() {
-  if (!SlotMachine.won) {
-    SlotMachine.spinReel('#reel-1', 420 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.spinReel('#reel-2', 420 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.spinReel('#reel-3', 420 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.win.tea();
-    SlotMachine.played = true;
-    SlotMachine.won = true;
-    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
-  }
-});
+  return elem;
+};
 
-$('#espresso').on('click', function() {
-  if (!SlotMachine.won) {
-    SlotMachine.spinReel('#reel-1', 390 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.spinReel('#reel-2', 390 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.spinReel('#reel-3', 390 * SlotMachine.degCorrection, 0.5);
-    SlotMachine.win.espresso();
-    SlotMachine.played = true;
-    SlotMachine.won = true;
-    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
-  }
-});
-
-$('#mute').on('click', function() {
-  // var attr = $('.audio-player').prop('muted');
-  if (!SlotMachine.muted) {
-    $('.audio-player').prop('muted', true);
-    $('#mute').html('UnMute');
-    SlotMachine.muted = true;
-  } else {
-    $('.audio-player').prop('muted', false);
-    $('#mute').html('Mute');
-    SlotMachine.muted = false;
-  }
-});
+SlotMachine.fadeNRemove = function(duration, elem) {
+  $(elem).fadeOut(duration);
+  setTimeout( function() {
+    elem.parentNode.removeChild(elem);
+  }, duration);
+};
 
 
+SlotMachine.slideInElem = function (className, direction, duration, delay) {
+  // console.log('called slideInElem');
+  var easing = 'cubic-bezier(0.520, 0.025, 0.060, 1.575)';
+  var slideIn = 'translateX(' + direction + 'px)';
 
+  $('.' + className).css({
+      transform        : slideIn,
+      WebkitTransform  : slideIn,
+      MozTransform     : slideIn,
+      msTransform      : slideIn,
+      OTransform       : slideIn,
 
+      transition       : duration + 's ' + easing,
+      WebkitTransition : duration + 's ' + easing,
+      MozTransition    : duration + 's ' + easing,
+      msTransition     : duration + 's ' + easing,
+      OTransition      : duration + 's ' + easing,
 
+      transitionDelay  : delay + 's',
+      transitionDelay  : delay + 's',
+      WebkitTransitionDelay: delay + 's',
+      MozTransitionDelay: delay + 's',
+      OTransitionDelay : delay + 's'
+
+  });
+};
+
+/////////////////////////
+// WIN / GAME-END METHODS
+/////////////////////////
 
 SlotMachine.win.coffee = function() {
   // put some good stuff in here. jQuery, gifs, ...
@@ -325,71 +331,72 @@ SlotMachine.win.espresso = function() {
 };
 
 
+/////////////////////////
+// CONTROLS
+/////////////////////////
 
-
-
-SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure, top, bottom, left, right, z, placeMeasure, message, imagePath) {
-  var container = document.getElementsByClassName('container')[0];
-  var elem = document.createElement(tag);
-  $(elem).hide().appendTo(container).fadeIn(duration).css({
-    width    : width  + sizeMeasure,
-    height   : height + sizeMeasure,
-    top      : top    + placeMeasure,
-    bottom   : bottom + placeMeasure,
-    left     : left   + placeMeasure,
-    right    : right  + placeMeasure,
-    zIndex   : z,
-    position : 'fixed',
-  });
-  // elem.id = className;
-  elem.setAttribute("id", id);
-  if (tag === 'img') { 
-    elem.src = imagePath;
+// Play when play button is clicked
+$('#play').on('click', function() {
+  if (!SlotMachine.played & !SlotMachine.won) {
+    SlotMachine.play();
+    SlotMachine.played = true;
+    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  } else {
+    SlotMachine.spinReel('#reel-1', 0, 0.25);
+    SlotMachine.spinReel('#reel-2', 30, 0.5);
+    SlotMachine.spinReel('#reel-3', 60, 0.75);
+    SlotMachine.played = false;
+    $('#play').html('Play!').removeClass('btn-danger').addClass('btn-success');
   }
+});
 
-  if (id === 'congrats') {
-    elem.className = 'jumbotron shadowed';
-    elem.innerHTML = '<h1>Yes!</h1><h2>You won ' + message + '!</h2>';
-    elem.style.color = 'white';
+$('#coffee').on('click', function() {
+  if (!SlotMachine.won) {
+    SlotMachine.spinReel('#reel-1', 360 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-2', 360 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-3', 360 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.win.coffee();
+    SlotMachine.played = true;
+    SlotMachine.won = true;
+    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
   }
+});
 
-  return elem;
-};
+$('#tea').on('click', function() {
+  if (!SlotMachine.won) {
+    SlotMachine.spinReel('#reel-1', 420 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-2', 420 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-3', 420 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.win.tea();
+    SlotMachine.played = true;
+    SlotMachine.won = true;
+    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  }
+});
 
-SlotMachine.fadeNRemove = function(duration, elem) {
-  $(elem).fadeOut(duration);
-  setTimeout( function() {
-    elem.parentNode.removeChild(elem);
-  }, duration);
-};
+$('#espresso').on('click', function() {
+  if (!SlotMachine.won) {
+    SlotMachine.spinReel('#reel-1', 390 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-2', 390 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-3', 390 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.win.espresso();
+    SlotMachine.played = true;
+    SlotMachine.won = true;
+    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  }
+});
 
-
-SlotMachine.slideInElem = function (className, direction, duration, delay) {
-  // console.log('called slideInElem');
-  var easing = 'cubic-bezier(0.520, 0.025, 0.060, 1.575)';
-  var slideIn = 'translateX(' + direction + 'px)';
-
-  $('.' + className).css({
-      transform        : slideIn,
-      WebkitTransform  : slideIn,
-      MozTransform     : slideIn,
-      msTransform      : slideIn,
-      OTransform       : slideIn,
-
-      transition       : duration + 's ' + easing,
-      WebkitTransition : duration + 's ' + easing,
-      MozTransition    : duration + 's ' + easing,
-      msTransition     : duration + 's ' + easing,
-      OTransition      : duration + 's ' + easing,
-
-      transitionDelay  : delay + 's',
-      transitionDelay  : delay + 's',
-      WebkitTransitionDelay: delay + 's',
-      MozTransitionDelay: delay + 's',
-      OTransitionDelay : delay + 's'
-
-  });
-};
-
+$('#mute').on('click', function() {
+  // var attr = $('.audio-player').prop('muted');
+  if (!SlotMachine.muted) {
+    $('.audio-player').prop('muted', true);
+    $('#mute').html('UnMute');
+    SlotMachine.muted = true;
+  } else {
+    $('.audio-player').prop('muted', false);
+    $('#mute').html('Mute');
+    SlotMachine.muted = false;
+  }
+});
 
 // })();
