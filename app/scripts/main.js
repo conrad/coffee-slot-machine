@@ -251,7 +251,7 @@ SlotMachine.win.tea = function() {
 
   // dur, id, tag, w, h, t, b, l, r, z, measurement, path
 
-  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 300, 240, 'px', 20, null, 20, null, 11, '%', 'TEA!');
+  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 300, 230, 'px', 15, null, 30, null, 11, '%', 'all the tea');
 
   var container = document.getElementsByClassName('container')[0];
   var ozzy = document.createElement('img');
@@ -288,8 +288,8 @@ SlotMachine.win.tea = function() {
   // Remove these divs
   setTimeout( function() {
     SlotMachine.fadeNRemove(1500, congrats);
-    SlotMachine.fadeNRemove(2500, ozzy);
-    SlotMachine.fadeNRemove(4500, slash);
+    // SlotMachine.fadeNRemove(2500, ozzy);
+    // SlotMachine.fadeNRemove(4500, slash);
     SlotMachine.won = false;
   }, 6000);  
 
