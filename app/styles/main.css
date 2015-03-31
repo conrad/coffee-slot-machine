@@ -4941,6 +4941,8 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
+  padding: 12px 55px;
+  width: 510px;
   text-align: center;
   border-bottom: 1px solid #e5e5e5; }
 
@@ -4956,9 +4958,9 @@ body {
   margin-top: 28px; }
 
 #stage {
-  margin: 150px auto;
-  width: 600px;
-  height: 350px;
+  margin: 0 auto;
+  width: 630px;
+  height: 270px;
   -webkit-perspective: 800; }
 
 #slot-machine {
@@ -4967,22 +4969,21 @@ body {
   left: -30px;
   background: url('../assets/slot-machine.png') no-repeat;
   background-size: contain;
-  width: 650px;
-  height: 680px;
+  width: 460px;
+  height: 470px;
   z-index: 1; }
 
 #reels {
-  margin: 200px -150px auto;
-  padding: 64px 0;
-  width: 600px;
+  margin: 190px -169px auto;
+  width: 450px;
   height: 200px;
   /* Ensure that we're in 3D space */
   -webkit-transform-style: preserve-3d; }
 
 .reel {
   float: left;
-  height: 100px;
-  width: 140px;
+  height: 78px;
+  width: 110px;
   -webkit-transform-style: preserve-3d;
   -webkit-transition-timing-function: cubic-bezier(0.77, 0.115, 0.42, 1.04); }
 
@@ -4994,49 +4995,17 @@ body {
 
 .poster {
   position: absolute;
-  left: 250px;
-  width: 108px;
-  height: 108px;
+  left: 237px;
+  width: 85px;
+  height: 78px;
   opacity: 1.0;
   color: rgba(0, 0, 0, 0.9); }
 
 .image {
-  margin-top: 10px; }
-
-.poster > p {
-  font-family: 'Georgia', serif;
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 28px; }
+  margin-top: 3px; }
 
 /*
 Set up each row to have a different animation duration
 and alternating x-axis rotation directions.
 */
-#reel-1.active {
-  -webkit-transform: rotateX(1080deg);
-  -webkit-transition-duration: 4s; }
-
-#reel-2.active {
-  -webkit-transform: rotateX(-1800deg);
-  -webkit-transition-duration: 6s; }
-
-#reel-3.active {
-  -webkit-transform: rotateX(3600deg);
-  -webkit-transition-duration: 9s; }
-
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px; }
-  /* Remove the padding we set earlier */
-  .header, .marketing, .footer {
-    padding-left: 0;
-    padding-right: 0; }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px; }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0; } }

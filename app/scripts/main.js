@@ -2,8 +2,9 @@
 // $(function() {
 var SlotMachine = {
   postersPerReel: 12,
-  reelRadius: 200,
+  reelRadius: 145,
   spinTime: 5,
+  degCorrection: 1,
   played: false,
   setup: {},
   win: {}         // organizational objects
@@ -12,7 +13,7 @@ var SlotMachine = {
 window.SlotMachine = SlotMachine;
 
 
-SlotMachine.setup.place_posters = function(reel, reelNum) {
+SlotMachine.setup.placePosters = function(reel, reelNum) {
   var posterAngle = 360 / SlotMachine.postersPerReel;
 
   for (var i = 0; i < SlotMachine.postersPerReel; i ++) {
@@ -45,9 +46,9 @@ SlotMachine.setup.place_posters = function(reel, reelNum) {
 };
 
 SlotMachine.init = function() {
-  SlotMachine.setup.place_posters(document.getElementById('reel-1'), 1);
-  SlotMachine.setup.place_posters(document.getElementById('reel-2'), 2);
-  SlotMachine.setup.place_posters(document.getElementById('reel-3'), 3);
+  SlotMachine.setup.placePosters(document.getElementById('reel-1'), 1);
+  SlotMachine.setup.placePosters(document.getElementById('reel-2'), 2);
+  SlotMachine.setup.placePosters(document.getElementById('reel-3'), 3);
 };
 
 // call init once the document is fully loaded
@@ -85,17 +86,21 @@ SlotMachine.play = function() {
   var final2 = Math.ceil(Math.random() * 12);
   var final3 = Math.ceil(Math.random() * 12);
   // console.log(final1, final2, final3);
-  var angle1 = (final1 * 30) + 719; 
-  var angle2 = (final2 * 30) + 1798; 
-  var angle3 = (final3 * 30) + 3237; 
+  var angle1 = (final1 * 30 * SlotMachine.degCorrection) + 720; 
+  var angle2 = (final2 * 30 * SlotMachine.degCorrection) + 1800; 
+  var angle3 = (final3 * 30 * SlotMachine.degCorrection) + 3240; 
 
-  SlotMachine.spinReel('#reel-1', angle1, SlotMachine.spinTime/2);
-  SlotMachine.spinReel('#reel-2', angle2, SlotMachine.spinTime/1.5);
+  SlotMachine.spinReel('#reel-1', angle1, SlotMachine.spinTime / 2);
+  SlotMachine.spinReel('#reel-2', angle2, SlotMachine.spinTime / 1.5);
   SlotMachine.spinReel('#reel-3', angle3, SlotMachine.spinTime);
 
   if (final1 % 3 === final2 % 3 && final1 % 3 === final3 % 3) {    // win
     // Wait until reels are done spinning
+    
+    // var delay = ; 
+
     setTimeout(function() {
+      // console.log('You won... delay:', delay)
       if (final1 % 3 === 0) {             // coffee
         SlotMachine.win.coffee();
       } else if (final1 % 3 === 1) {      // tea      
@@ -103,8 +108,9 @@ SlotMachine.play = function() {
       } else if (final1 % 3 === 2) {      // espresso
         SlotMachine.win.tea();
       }
-    }, SlotMachine.spinTime);
+    }, (SlotMachine.spinTime * 1000) );
   }
+
 };
 
 // Play when play button is clicked
@@ -123,27 +129,27 @@ $('#play').on('click', function() {
 });
 
 $('#coffee').on('click', function() {
-  SlotMachine.spinReel('#reel-1', 360, 0.5);
-  SlotMachine.spinReel('#reel-2', 360, 0.5);
-  SlotMachine.spinReel('#reel-3', 360, 0.5);
+  SlotMachine.spinReel('#reel-1', 360 * SlotMachine.degCorrection, 0.5);
+  SlotMachine.spinReel('#reel-2', 360 * SlotMachine.degCorrection, 0.5);
+  SlotMachine.spinReel('#reel-3', 360 * SlotMachine.degCorrection, 0.5);
   SlotMachine.win.coffee();
   SlotMachine.played = true;
   $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
 });
 
 $('#tea').on('click', function() {
-  SlotMachine.spinReel('#reel-1', 390, 0.5);
-  SlotMachine.spinReel('#reel-2', 390, 0.5);
-  SlotMachine.spinReel('#reel-3', 390, 0.5);
+  SlotMachine.spinReel('#reel-1', 420 * SlotMachine.degCorrection, 0.5);
+  SlotMachine.spinReel('#reel-2', 420 * SlotMachine.degCorrection, 0.5);
+  SlotMachine.spinReel('#reel-3', 420 * SlotMachine.degCorrection, 0.5);
   SlotMachine.win.tea();
   SlotMachine.played = true;
   $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
 });
 
 $('#espresso').on('click', function() {
-  SlotMachine.spinReel('#reel-1', 420, 0.5);
-  SlotMachine.spinReel('#reel-2', 420, 0.5);
-  SlotMachine.spinReel('#reel-3', 420, 0.5);
+  SlotMachine.spinReel('#reel-1', 390 * SlotMachine.degCorrection, 0.5);
+  SlotMachine.spinReel('#reel-2', 390 * SlotMachine.degCorrection, 0.5);
+  SlotMachine.spinReel('#reel-3', 390 * SlotMachine.degCorrection, 0.5);
   SlotMachine.win.espresso();
   SlotMachine.played = true;
   $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
@@ -188,9 +194,8 @@ SlotMachine.pickPoster = function(reelNum, imageSet) {
 
 SlotMachine.win.coffee = function() {
   // put some good stuff in here. jQuery, gifs, ...
-  console.log('Win Coffee!');
-  $('.audio-player')[0].play();
-
+    console.log('Win Coffee!');
+    $('.audio-player')[0].play();
 };
 
 SlotMachine.win.tea = function() {

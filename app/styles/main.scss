@@ -53,6 +53,8 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
+    padding: 12px 55px;
+    width: 510px;
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
 }
@@ -72,9 +74,9 @@ body {
 }
 
 #stage {
-  margin: 150px auto;
-  width: 600px;
-  height: 350px;
+  margin: 0 auto;
+  width: 630px;
+  height: 270px;
   -webkit-perspective: 800;
 }
 
@@ -84,15 +86,14 @@ body {
   left: -30px;
   background: url('../assets/slot-machine.png') no-repeat;
   background-size: contain;
-  width: 650px;
-  height: 680px;
+  width: 460px;   // 650px;
+  height: 470px;  // 680px;
   z-index: 1;
 }
 
 #reels {
-  margin: 200px -150px auto;
-  padding: 64px 0;
-  width: 600px;
+  margin: 190px -169px auto;
+  width: 450px;
   height: 200px;
   /* Ensure that we're in 3D space */
   -webkit-transform-style: preserve-3d;
@@ -100,8 +101,8 @@ body {
 
 .reel {
   float: left;
-  height: 100px;  // this height prevents wobbling rotation 
-  width: 140px;   // centers reels
+  height: 78px;  // height must be same as poster height to prevent wobbling rotation
+  width: 110px;   // centers reels
   -webkit-transform-style: preserve-3d;
   -webkit-transition-timing-function: cubic-bezier(0.770, 0.115, 0.420, 1.040);
   // -webkit-animation-iteration-count: infinite;
@@ -119,9 +120,9 @@ body {
 
 .poster {
   position: absolute;
-  left: 250px;
-  width: 108px;
-  height: 108px;
+  left: 237px;
+  width: 85px;
+  height: 78px;
   // display: table;
   opacity: 1.0;
   color: rgba(0,0,0,0.9);
@@ -131,7 +132,7 @@ body {
 .image {
   // vertical-align: middle;
   // display: table-cell;  
-  margin-top: 10px;
+  margin-top: 3px;
 }
 
 // #poster1 {
@@ -146,35 +147,35 @@ body {
 //   left: 250px;
 // }
 
-.poster > p {
-  font-family: 'Georgia', serif;
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 28px;
-}
+// .poster > p {
+//   font-family: 'Georgia', serif;
+//   font-size: 36px;
+//   font-weight: bold;
+//   text-align: center;
+//   margin-top: 28px;
+// }
 
 /*
 Set up each row to have a different animation duration
 and alternating x-axis rotation directions.
 */
-#reel-1.active {
-  // -webkit-animation-name: spin-1;
-  -webkit-transform: rotateX(1080deg);
-  -webkit-transition-duration: 4s; 
-}
+// #reel-1.active {
+//   // -webkit-animation-name: spin-1;
+//   -webkit-transform: rotateX(1080deg);
+//   -webkit-transition-duration: 4s; 
+// }
 
-#reel-2.active {
-  // -webkit-animation-name: spin-2;
-  -webkit-transform: rotateX(-1800deg);
-  -webkit-transition-duration: 6s;
-}
+// #reel-2.active {
+//   // -webkit-animation-name: spin-2;
+//   -webkit-transform: rotateX(-1800deg);
+//   -webkit-transition-duration: 6s;
+// }
 
-#reel-3.active {
-  // -webkit-animation-name: spin-3;
-  -webkit-transform: rotateX(3600deg);
-  -webkit-transition-duration: 9s;
-}
+// #reel-3.active {
+//   // -webkit-animation-name: spin-3;
+//   -webkit-transform: rotateX(3600deg);
+//   -webkit-transition-duration: 9s;
+// }
 
 // @-webkit-keyframes spin-1 {                 // x-spin
 //   0%    { -webkit-transform: rotateX(0deg); }
@@ -196,26 +197,26 @@ and alternating x-axis rotation directions.
 
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
-    }
+// @media screen and (min-width: 768px) {
+//     .container {
+//         max-width: 730px;
+//     }
 
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
-    }
+//     /* Remove the padding we set earlier */
+//     .header,
+//     .marketing,
+//     .footer {
+//         padding-left: 0;
+//         padding-right: 0;
+//     }
 
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
+//     /* Space out the masthead */
+//     .header {
+//         margin-bottom: 30px;
+//     }
 
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
-}
+//     /* Remove the bottom border on the jumbotron for visual effect */
+//     .jumbotron {
+//         border-bottom: 0;
+//     }
+// }
