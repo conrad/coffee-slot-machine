@@ -8,6 +8,7 @@ var SlotMachine = {
   played: false,
   muted: false,
   setup: {},
+  won: false,
   win: {}         // organizational objects
 
 };
@@ -113,7 +114,7 @@ SlotMachine.play = function() {
 
 // Play when play button is clicked
 $('#play').on('click', function() {
-  if (!SlotMachine.played) {
+  if (!SlotMachine.played & !SlotMachine.won) {
     SlotMachine.play();
     SlotMachine.played = true;
     $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
@@ -127,30 +128,39 @@ $('#play').on('click', function() {
 });
 
 $('#coffee').on('click', function() {
-  SlotMachine.spinReel('#reel-1', 360 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.spinReel('#reel-2', 360 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.spinReel('#reel-3', 360 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.win.coffee();
-  SlotMachine.played = true;
-  $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  if (!SlotMachine.won) {
+    SlotMachine.spinReel('#reel-1', 360 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-2', 360 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-3', 360 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.win.coffee();
+    SlotMachine.played = true;
+    SlotMachine.won = true;
+    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  }
 });
 
 $('#tea').on('click', function() {
-  SlotMachine.spinReel('#reel-1', 420 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.spinReel('#reel-2', 420 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.spinReel('#reel-3', 420 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.win.tea();
-  SlotMachine.played = true;
-  $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  if (!SlotMachine.won) {
+    SlotMachine.spinReel('#reel-1', 420 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-2', 420 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-3', 420 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.win.tea();
+    SlotMachine.played = true;
+    SlotMachine.won = true;
+    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  }
 });
 
 $('#espresso').on('click', function() {
-  SlotMachine.spinReel('#reel-1', 390 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.spinReel('#reel-2', 390 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.spinReel('#reel-3', 390 * SlotMachine.degCorrection, 0.5);
-  SlotMachine.win.espresso();
-  SlotMachine.played = true;
-  $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  if (!SlotMachine.won) {
+    SlotMachine.spinReel('#reel-1', 390 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-2', 390 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.spinReel('#reel-3', 390 * SlotMachine.degCorrection, 0.5);
+    SlotMachine.win.espresso();
+    SlotMachine.played = true;
+    SlotMachine.won = true;
+    $('#play').html('Play Again?').removeClass('btn-success').addClass('btn-danger');
+  }
 });
 
 $('#mute').on('click', function() {
@@ -198,9 +208,9 @@ SlotMachine.win.coffee = function() {
   $('.audio-player')[0].play();
 
   // dur, id, tag, w, h, t, b, l, r, z, measurement, path
-  var congrats = SlotMachine.fadeInElem(500, 'congrats', 'div', 60, 30, 20, null, 20, null, 9, '%');
+  var congrats = SlotMachine.fadeInElem(500, 'congrats', 'div', 60, 30, 20, null, 20, null, 9, '%', 'COFFEE');
 
-  var cooper = SlotMachine.fadeInElem(3500, 'cooper', 'img', 305, 342, null, -27, 0, null, 10, 'px', '../assets/win/coffee/cooper-thumbs-up.png');
+  var cooper = SlotMachine.fadeInElem(3500, 'cooper', 'img', 305, 342, null, -27, 0, null, 10, 'px', null, '../assets/win/coffee/cooper-thumbs-up.png');
 
   var audio = new Audio("../assets/win/coffee/damn-fine-coffee.mp3");
   document.body.appendChild(audio);
@@ -209,12 +219,13 @@ SlotMachine.win.coffee = function() {
     if (!SlotMachine.muted) {
       $('.cooper-audio')[0].play();
     }
-  })
+  });
 
   // Remove these divs
   setTimeout( function() {
     SlotMachine.fadeNRemove(2000, cooper);
     SlotMachine.fadeNRemove(1500, congrats);
+    SlotMachine.won = false;
   }, 6500);  
 
   setTimeout(function() {
@@ -228,7 +239,8 @@ SlotMachine.win.tea = function() {
   $('.audio-player')[0].play();
 
   // dur, id, tag, w, h, t, b, l, r, z, measurement, path
-  var congrats = SlotMachine.fadeInElem(1500, 'congrats', 'div', 60, 30, 20, null, 20, null, 11, '%');
+
+  SlotMachine.won = false;
 
 
 };
@@ -239,16 +251,34 @@ SlotMachine.win.espresso = function() {
   console.log('Win Espresso!');
   $('.audio-player')[0].play();
 
-  // dur, id, tag, w, h, t, b, l, r, z, measurement, path
-  var congrats = SlotMachine.fadeInElem(1500, 'congrats', 'div', 60, 30, 20, null, 20, null, 11, '%');
+  // dur, id, tag, w, h, t, b, l, r, z, measurement, message, path
+  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 60, 30, 20, null, 20, null, 11, '%', 'ESPRESSO');
 
+  var kanye = SlotMachine.fadeInElem(1000, 'kanye', 'img', 466, 698, 20, null, null, 100, 10, 'px', null, '../assets/win/espresso/kanye-suit.gif');
 
-  var kanye = SlotMachine.fadeInElem('kanye', '../assets/win/espresso/kanye-suit.gif');
+  var audio = new Audio("../assets/win/espresso/stronger.mp3");
+  document.body.appendChild(audio);
+  audio.className = 'kanye-audio';
+  $('#kanye').on('click', function() {
+    if (!SlotMachine.muted) {
+      $('.kanye-audio')[0].play();
+    }
+  });
 
+  // Remove these divs
+  setTimeout( function() {
+    SlotMachine.fadeNRemove(2500, kanye);
+    SlotMachine.fadeNRemove(1500, congrats);
+    SlotMachine.won = false;
+  }, 6000);  
+
+  setTimeout(function() {
+    audio.parentNode.removeChild(audio);
+  }, 20000);
 };
 
 
-SlotMachine.fadeInElem = function(duration, id, tag, width, height, top, bottom, left, right, z, measurement, imagePath) {
+SlotMachine.fadeInElem = function(duration, id, tag, width, height, top, bottom, left, right, z, measurement, message, imagePath) {
   var container = document.getElementsByClassName('container')[0];
   var elem = document.createElement(tag);
   $(elem).hide().appendTo(container).fadeIn(duration).css({
@@ -269,7 +299,7 @@ SlotMachine.fadeInElem = function(duration, id, tag, width, height, top, bottom,
 
   if (id === 'congrats') {
     elem.className = 'jumbotron shadowed';
-    elem.innerHTML = '<h1>Yes!</h1><h2>You won COFFEE!</h2>';
+    elem.innerHTML = '<h1>Yes!</h1><h2>You won ' + message + '!</h2>';
     elem.style.color = 'white';
     var shadow = '2px';
   }

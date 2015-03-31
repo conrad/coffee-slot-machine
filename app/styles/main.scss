@@ -30,6 +30,7 @@ body {
 /* Custom page header */
 .header {
     border-bottom: 1px solid #e5e5e5;
+    min-width: 550px;
 }
 
 /* Make the masthead heading the same height as the navigation */
@@ -63,6 +64,10 @@ body {
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;
+}
+
+.cheat {
+  margin: 0 5px;
 }
 
 /* Supporting marketing content */
@@ -142,6 +147,9 @@ body {
   // overflow: hidden;  
 }
 #cooper {
+  cursor: pointer;
+}
+#kanye {
   cursor: pointer;
 }
 
