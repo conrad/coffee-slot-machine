@@ -70,8 +70,8 @@ SlotMachine.setup.images = {
 SlotMachine.init = function() {
 
   // Banner animation
-  SlotMachine.slideInElem('banner', 350, 1, 0.75);
-
+  SlotMachine.slideInElem('banner', 0, 1, 0.75);
+  
   SlotMachine.setup.placePosters(document.getElementById('reel-1'), 1);
   SlotMachine.setup.placePosters(document.getElementById('reel-2'), 2);
   SlotMachine.setup.placePosters(document.getElementById('reel-3'), 3);
@@ -244,11 +244,20 @@ SlotMachine.win.tea = function() {
 
   // dur, id, tag, w, h, t, b, l, r, z, measurement, path
 
-  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 300, 240, 'px', 20, null, 20, null, 11, '%', 'tea');
+  var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 300, 240, 'px', 20, null, 20, null, 11, '%', 'TEA!');
+
+  var container = document.getElementsByClassName('container')[0];
+  var ozzy = document.createElement('img');
+  var slash = document.createElement('img');
+
+  $(ozzy).appendTo(container);
+  $(slash).appendTo(container);
 
 
+  // SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure, top, bottom, left, right, z, placeMeasure, message, imagePath) 
 
-  // SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure, top, bottom, left, right, z, placeMeasure, message, imagePath) {
+  // SlotMachine.fadeInElem(2, 'ozzy', 'img', 500, 500, 'px', 0, null, 0, null, 13, 'px', null, '../assets/win/tea/ozzy.png');
+
   //   var container = document.getElementsByClassName('container')[0];
   //   var elem = document.createElement(tag);
   //   $(elem).hide().appendTo(container).fadeIn(duration).css({
@@ -269,9 +278,17 @@ SlotMachine.win.tea = function() {
 
 
 
+  // Remove these divs
+  setTimeout( function() {
+    SlotMachine.fadeNRemove(1500, congrats);
+    SlotMachine.fadeNRemove(2500, ozzy);
+    SlotMachine.fadeNRemove(4500, slash);
+    SlotMachine.won = false;
+  }, 6000);  
 
-  SlotMachine.won = false;
-
+  setTimeout(function() {
+    // audio.parentNode.removeChild(audio);
+  }, 20000);
 
 };
 
@@ -306,6 +323,9 @@ SlotMachine.win.espresso = function() {
     audio.parentNode.removeChild(audio);
   }, 20000);
 };
+
+
+
 
 
 SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure, top, bottom, left, right, z, placeMeasure, message, imagePath) {

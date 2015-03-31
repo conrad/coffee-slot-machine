@@ -39,9 +39,14 @@ body {
     margin-bottom: 0;
     line-height: 40px;
     padding-bottom: 19px;
+    display: inline;
 }
 .banner {
-  margin-left: -350px;
+  -webkit-transform: translateX(-350px);
+  -moz-transform:    translateX(-350px);
+  -ms-transform:     translateX(-350px);
+  -o-transform:      translateX(-350px);
+  transform:         translateX(-350px);
 }
 
 /* Custom page footer */
@@ -51,11 +56,8 @@ body {
     border-top: 1px solid #e5e5e5;
 }
 
-.icons {
-  display: inline;
-  // position: fixed;
-  // top: 0px;
-
+.icon {
+  margin: 0 4px;
 }
 
 .container-narrow > hr {
@@ -159,6 +161,27 @@ body {
 #cooper, 
 #kanye {
   cursor: pointer;
+}
+
+#ozzy {
+  position: fixed;
+  width: 317px;
+  height: 387px;
+  background: url('../assets/win/tea/ozzy.png') no-repeat;
+  top: 0;
+  left: 0;
+  z-index: 13;
+}
+
+#slash {
+  position: fixed;
+  width: 165px;
+  height: 413px;
+  // background: url('../assets/win/tea/slash.jpg') no-repeat;
+  // background-image: '../assets/win/tea/slash.jpg';
+  top: 0;
+  right: 5px;
+  z-index: 9;
 }
 
 .shadowed{
