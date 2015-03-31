@@ -279,7 +279,7 @@ SlotMachine.win.espresso = function() {
   // dur, id, tag, w, h, sizeMeasure, t, b, l, r, placeMeasure, z, message, path
   var congrats = SlotMachine.fadeInElem(2000, 'congrats', 'div', 500, 391, 'px', 40, null, 50, null, 10, '%', 'ESPRESSO');
 
-  var kanye = SlotMachine.fadeInElem(1000, 'kanye', 'img', 466, 698, 'px', null, 0, null, -55, 11, 'px', null, '../assets/win/espresso/kanye-suit.gif');
+  var kanye = SlotMachine.fadeInElem(1000, 'kanye', 'img', 466, 698, 'px', 20, null, null, -55, 11, 'px', null, '../assets/win/espresso/kanye-suit.gif');
 
   var audio = new Audio("../assets/win/espresso/stronger.mp3");
   document.body.appendChild(audio);
