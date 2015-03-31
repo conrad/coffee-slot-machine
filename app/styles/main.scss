@@ -136,6 +136,23 @@ body {
   margin-top: 3px;
 }
 
+.cooper {
+  bottom: -27px;
+  left: 0px;
+  height: 342px;
+  width: 305px;
+  z-index: 10;
+  position: fixed;
+  // -webkit-opacity: 0.25;
+  // -moz-opacity: 0.25;
+  // opacity: 0.25;
+  // -webkit-transition: all 3s ease;
+  // -moz-transition: all 3s ease;
+  // -ms-transition: all 3s ease;
+  // -o-transition: all 3s ease;
+  // transition: all 3s ease;
+}
+
 // #poster1 {
 //   // top: 100px;
 //   left: 50px;

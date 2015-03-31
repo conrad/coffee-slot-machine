@@ -193,32 +193,36 @@ SlotMachine.win.coffee = function() {
   // put some good stuff in here. jQuery, gifs, ...
     console.log('Win Coffee!');
     $('.audio-player')[0].play();
+
+    var cooper = SlotMachine.addElemForFade('cooper', '../assets/win/coffee/cooper-thumbs-up.png');
+    var audio = new Audio("../assets/win/coffee/damn-fine-coffee.mp3");
+    // var cooper2 = document.getElementsByClassName('cooper')[0];
+    // cooper.onclick=audio.play;
+    // cooper2.addEventListener('click', audio.play, false);
+    // document.getElementsByClassName('cooper')[0].addEventListener('click', audio.play, false);
+    // $('.cooper').on('click', audio.play);
+
+    setTimeout( function() {
+      $(cooper).fadeOut(2000);
+      setTimeout( function() {
+        cooper.parentNode.removeChild(cooper);
+      }, 2000);
+    }, 5000);
+    
+
+    // audio.loop = false;
+
+    // audio.onended = function(){
+    // audio.play();
+    // }
+     // = document.getElementsByClassName('container')[0];
+
 };
 
 SlotMachine.win.tea = function() {
   // put some good stuff in here. jQuery, gifs, 
   console.log('Win Tea!');
   $('.audio-player')[0].play();
-  
-
-  // SlotMachine.spinReel = function(selector, angle, duration) {
-  //   var easing = 'cubic-bezier(0.535, 0.300, 0.615, 1.040)';
-  //   var spin = 'rotateX(' + angle + 'deg)'
-  //   // console.log('spinReel called with', selector, angle, duration);
-  //   $(selector).css({
-  //       transform        : spin,
-  //       WebkitTransform  : spin,
-  //       MozTransform     : spin,
-  //       msTransform      : spin,
-  //       OTransform       : spin,
-
-  //       transition       : duration + 's ' + easing,
-  //       WebkitTransition : duration + 's ' + easing,
-  //       MozTransition    : duration + 's ' + easing,
-  //       msTransition     : duration + 's ' + easing,
-  //       OTransition      : duration + 's ' + easing
-  //   });
-  // };
 
 };
 
@@ -226,6 +230,23 @@ SlotMachine.win.espresso = function() {
   // put some good stuff in here. jQuery, gifs, 
   console.log('Win Espresso!');
   $('.audio-player')[0].play();
+};
+
+
+SlotMachine.addElemForFade = function(className, imagePath) {
+  var container = document.getElementsByClassName('container')[0];
+  // console.log(container);
+  // var elem = document.createElement("div");
+  var elem = document.createElement("img");
+  // container.appendChild(elem);
+  // elem.style.opacity = 0;
+  $(elem).hide().appendTo(container).fadeIn(3500);
+  elem.src = imagePath;
+  elem.className = className;
+
+  // window.getComputedStyle(elem).opacity;   // apply initial state
+  // elem.style.opacity = 1;     // Fade it in.
+  return elem;
 };
 
 

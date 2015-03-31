@@ -5005,6 +5005,14 @@ body {
 .image {
   margin-top: 3px; }
 
+.cooper {
+  bottom: -27px;
+  left: 0px;
+  height: 342px;
+  width: 305px;
+  z-index: 10;
+  position: fixed; }
+
 /*
 Set up each row to have a different animation duration
 and alternating x-axis rotation directions.
