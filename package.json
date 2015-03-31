@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "start": "nodemon app.js",
-    "postinstall": "gulp install && gulp"
+    "postinstall": "gulp install && gulp build"
   },
   "dependencies": {
     "express": "^4.12.3",
-    "node": "0.0.0",
     "nodemon": "^1.3.7"
   },
   "devDependencies": {
