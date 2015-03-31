@@ -146,6 +146,8 @@ gulp.task('serve', ['styles', 'connect'], function () {
     gulp.watch('bower.json', ['wiredep']);
 });
 
+gulp.task('deploy', ['html', 'images', 'icons', 'fonts', 'move']);
+
 gulp.task('build', ['lint', 'html', 'images', 'icons', 'fonts', 'move'], function() {
   gulp.start('uglify');
   gulp.start('minify');
@@ -154,3 +156,4 @@ gulp.task('build', ['lint', 'html', 'images', 'icons', 'fonts', 'move'], functio
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
 });
+
