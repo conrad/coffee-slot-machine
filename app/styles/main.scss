@@ -40,12 +40,22 @@ body {
     line-height: 40px;
     padding-bottom: 19px;
 }
+.banner {
+  margin-left: -350px;
+}
 
 /* Custom page footer */
 .footer {
     padding-top: 19px;
     color: #777;
     border-top: 1px solid #e5e5e5;
+}
+
+.icons {
+  display: inline;
+  // position: fixed;
+  // top: 0px;
+
 }
 
 .container-narrow > hr {
