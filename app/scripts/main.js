@@ -57,13 +57,10 @@ window.addEventListener('load', SlotMachine.init, false);
 
 
 SlotMachine.spinReel = function(selector, angle, duration) {
-  
-  ;
   var easing = 'cubic-bezier(0.535, 0.300, 0.615, 1.040)';
   var spin = 'rotateX(' + angle + 'deg)'
   // console.log('spinReel called with', selector, angle, duration);
   $(selector).css({
-
       transform        : spin,
       WebkitTransform  : spin,
       MozTransform     : spin,
@@ -203,6 +200,26 @@ SlotMachine.win.tea = function() {
   console.log('Win Tea!');
   $('.audio-player')[0].play();
   
+
+  // SlotMachine.spinReel = function(selector, angle, duration) {
+  //   var easing = 'cubic-bezier(0.535, 0.300, 0.615, 1.040)';
+  //   var spin = 'rotateX(' + angle + 'deg)'
+  //   // console.log('spinReel called with', selector, angle, duration);
+  //   $(selector).css({
+  //       transform        : spin,
+  //       WebkitTransform  : spin,
+  //       MozTransform     : spin,
+  //       msTransform      : spin,
+  //       OTransform       : spin,
+
+  //       transition       : duration + 's ' + easing,
+  //       WebkitTransition : duration + 's ' + easing,
+  //       MozTransition    : duration + 's ' + easing,
+  //       msTransition     : duration + 's ' + easing,
+  //       OTransition      : duration + 's ' + easing
+  //   });
+  // };
+
 };
 
 SlotMachine.win.espresso = function() {

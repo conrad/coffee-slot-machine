@@ -4941,6 +4941,7 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
+  margin: 10px auto;
   padding: 12px 55px;
   width: 510px;
   text-align: center;
