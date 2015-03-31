@@ -301,7 +301,6 @@ SlotMachine.fadeInElem = function(duration, id, tag, width, height, sizeMeasure,
     elem.className = 'jumbotron shadowed';
     elem.innerHTML = '<h1>Yes!</h1><h2>You won ' + message + '!</h2>';
     elem.style.color = 'white';
-    var shadow = '2px';
   }
 
   return elem;

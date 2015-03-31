@@ -19,21 +19,6 @@ var serveStatic = require('serve-static');
 var serveIndex = require('serve-index');
 
 
-// the paths to our app files
-var paths = {
-  // not including 3rd party js files
-  scripts: ['app/**/*.js'],
-  html: ['app/**/*.html', 'client/index.html'],
-  styles: ['app/styles/main.css'],
-  server: ['server/**/*.js'],
-  sass: ['app/styles/**/*.scss']
-};
-
-
-gulp.task('install', shell.task([
-  'npm install',
-  'bower install'
-]));
 
 gulp.task('clean', function (cb) {
   clean('dist', cb);
@@ -50,6 +35,7 @@ gulp.task('styles', function () {
     .pipe(sass({
       precision: 10
     }))
+    .pipe(minifyCss())
     .pipe(gulp.dest('dist/styles'));
 });
 
@@ -146,7 +132,12 @@ gulp.task('serve', ['styles', 'connect'], function () {
     gulp.watch('bower.json', ['wiredep']);
 });
 
-gulp.task('deploy', ['html', 'images', 'icons', 'fonts', 'move']);
+gulp.task('install', shell.task([
+  'npm install',
+  'bower install'
+]));
+
+gulp.task('deploy', ['html', 'uglify', 'images', 'icons', 'fonts', 'move']);
 
 gulp.task('build', ['lint', 'html', 'images', 'icons', 'fonts', 'move'], function() {
   gulp.start('uglify');
