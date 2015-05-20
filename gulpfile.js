@@ -8,7 +8,7 @@ var sass = require('gulp-sass');
 var cache = require('gulp-cache');
 var imagemin = require('gulp-imagemin');
 var uglify = require('gulp-uglify');
-var minifyCss = require('gulp-minify-css');
+var minify = require('gulp-minify-css');
 var useref = require('gulp-useref');
 var assets = useref.assets();
 var gulpif = require('gulp-if');
@@ -18,7 +18,6 @@ var connect = require('connect');
 var serveStatic = require('serve-static');
 var serveIndex = require('serve-index');
 
-var port = 4545;
 
 gulp.task('clean', function (cb) {
   clean('dist', cb);
@@ -35,7 +34,7 @@ gulp.task('styles', function () {
     .pipe(sass({
       precision: 10
     }))
-    // .pipe(minifyCss())
+    // .pipe(minify())
     .pipe(gulp.dest('dist/styles'));
 });
 
@@ -47,7 +46,7 @@ gulp.task('uglify', function () {
 
 gulp.task('minify', function () {
   return gulp.src('app/styles/*.css')
-    .pipe(minifyCss())
+    .pipe(minify())
     .pipe(gulp.dest('dist/styles'));
 });
 
@@ -81,7 +80,7 @@ gulp.task('html', ['styles'], function () {
     return gulp.src('app/*.html')
         .pipe(assets)
         .pipe(gulpif('*.js', uglify()))
-        .pipe(gulpif('*.css', minifyCss()))
+        .pipe(gulpif('*.css', minify()))
         .pipe(assets.restore())
         .pipe(useref())
         .pipe(gulp.dest('dist'));
@@ -109,9 +108,9 @@ gulp.task('connect', function () {
         .use(serveIndex('dist'));
 
     require('http').createServer(app)
-        .listen(port)
+        .listen(5000)
         .on('listening', function() {
-            console.log('Started connect web server on http://localhost:',port);
+            console.log('Started connect web server on http://localhost:', 5000);
         });
 });
 
@@ -119,7 +118,7 @@ gulp.task('serve', ['styles', 'connect'], function () {
 
     livereload.listen();
 
-    require('opn')('http://localhost:' + port);
+    require('opn')('http://localhost:' + 5000);
     
     gulp.watch('app/styles/**/*.scss', ['styles']);
     gulp.watch('bower.json', ['wiredep']);
@@ -135,6 +134,7 @@ gulp.task('serve', ['styles', 'connect'], function () {
 });
 
 gulp.task('install', shell.task([
+  // install npm & bower (if not already)
   'npm install',
   'bower install'
 ]));

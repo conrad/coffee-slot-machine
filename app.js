@@ -10,5 +10,5 @@ app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
 
-// export our app for testing and flexibility, required by index.js
+// export app for testing and flexibility
 module.exports = app;
